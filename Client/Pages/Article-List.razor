@@ -1,0 +1,47 @@
+﻿<div class="px-4 pt-4 flex flex-wrap">
+    @foreach (var item in IntroductionAry)
+    {
+        <Article_Introduction Introduction="item"></Article_Introduction>
+    }
+</div>
+
+@code {
+    private ArticleIntroductionModel[] IntroductionAry => new ArticleIntroductionModel[]
+        {
+            new ArticleIntroductionModel
+            {
+                Title = "在.net core中使用Quatuz.net",
+                DisplayDate = new DateTime(2021,9,1),
+                Hints = null,
+                NickName = "dotnet-use-quatuz-net"
+            },
+            new ArticleIntroductionModel
+            {
+                Title = "重灌後Visual Studio沒辦法還原Nuget套件",
+                DisplayDate = new DateTime(2021,9,1),
+                Hints = new string[]{ "https://api.nuget.org/v3/index.json"},
+                NickName = "visual-studio-restore-nuget"
+            },
+            new ArticleIntroductionModel
+            {
+                Title = "Git一次性Push至多個Remote Repository",
+                DisplayDate = new DateTime(2021,8,6),
+                Hints = null,
+                NickName = "git-push-multi-remote-repos"
+            },
+            new ArticleIntroductionModel
+            {
+                Title = "Docker Containers 之間相互溝通",
+                DisplayDate = new DateTime(2021,8,4),
+                Hints = new string[]{ "docker network ls","docker network inspect bridge"},
+                NickName = "docker-containers-connect-to-each-other"
+            },
+            new ArticleIntroductionModel
+            {
+                Title = "EF Core Db first 筆記",
+                DisplayDate = new DateTime(2021,7,23),
+                Hints = null,
+                NickName = "ef-core-db-first-note"
+            }
+        };
+}

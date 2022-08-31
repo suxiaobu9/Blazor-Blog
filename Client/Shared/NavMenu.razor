@@ -1,21 +1,25 @@
-﻿<nav class="border-b border-b-1 border-slate-200">
-    <div class="flex justify-between m-auto 2xl:w-[1400px] xl:w-[1000px] lg:w-[800px] md:w-[500px] w-[350px] ">
-        <div class="py-4 px-2">
-            <a href="" class="text-black text-2xl font-bold">
-                OverLoading
-            </a>
-        </div>
-        <div class="flex items-center">
-            <NavLink ActiveClass="bg-zinc-500 text-white" class="mx-1 border rounded-md p-2 text-zinc-500 border-zinc-300" href="Technology" Match="NavLinkMatch.Prefix">
-                <span class="text-xl">
-                    技術
+﻿<nav class="border-b border-b-1 border-slate-200 flex justify-between px-4">
+    <div class="py-4">
+        <a href="" class="text-black text-2xl font-bold">
+            OverLoading
+        </a>
+    </div>
+    <div class="flex items-center">
+        @foreach(var item in navLinkSettings){
+            <NavLink ActiveClass="bg-zinc-500 !text-white" class="mx-1 border rounded-md p-2 text-zinc-500 border-zinc-300" href="@item.href" Match="NavLinkMatch.All">
+                <span class="text-md">
+                    @item.title
                 </span>
             </NavLink>
-            <NavLink ActiveClass="bg-zinc-500 text-white" class="mx-1 border rounded-md p-2 text-zinc-500 border-zinc-300" href="Receipt" Match="NavLinkMatch.Prefix">
-                <span class="text-xl">
-                    食譜
-                </span>
-            </NavLink>
-        </div>
+        }
+       
     </div>
 </nav>
+
+@code {
+    private (string title, string href)[] navLinkSettings => new (string, string)[]
+    {
+            ("技術","/"),
+            ("食譜","/Recipe")
+    };
+}

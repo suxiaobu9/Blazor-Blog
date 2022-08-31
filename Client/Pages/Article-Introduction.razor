@@ -1,0 +1,30 @@
+﻿@if (Introduction != null)
+{
+    var articleHref = $"/article/{Introduction.NickName}";
+
+    <div class=" xl:w-[33%] lg:w-[50%] w-full">
+        <div class="border m-2 p-2">
+            <div class="flex flex-col border-b mb-2 pb-2">
+                <a href="@articleHref" class="text-xl text-black"> @Introduction.Title </a>
+                <label class="text-xs text-zinc-400 flex flex-row-reverse">@Introduction.DisplayDate?.ToString("yyyy-MM-dd")</label>
+            </div>
+            @if (Introduction.Hints != null && Introduction.Hints.Any())
+            {
+                <ul>
+                    @foreach (var item in Introduction.Hints)
+                    {
+                        <li><span class="text-md">@item</span></li>
+                    }
+                </ul>
+            }
+            <div class="flex flex-row-reverse">
+                <a href="@articleHref" class="text-zinc-400 text-xs">more...</a>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public ArticleIntroductionModel? Introduction { get; set; }
+}
