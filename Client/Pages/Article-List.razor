@@ -5,6 +5,8 @@
     }
 </div>
 
+<Paging PagingModel="pagingModel" OnPagingChangeEvent="PageChanged"></Paging>
+
 @code {
     private ArticleIntroductionModel[] IntroductionAry => new ArticleIntroductionModel[]
         {
@@ -44,4 +46,15 @@
                 NickName = "ef-core-db-first-note"
             }
         };
+
+    private PagingModel pagingModel => new PagingModel
+        {
+            Current = 2,
+            Total = 100
+        };
+
+    public void PageChanged(string page)
+    {
+        Console.WriteLine(page);
+    }
 }

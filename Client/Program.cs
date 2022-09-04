@@ -1,4 +1,4 @@
-using Blazor_Blog.Client;
+using Blazor.Blog.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

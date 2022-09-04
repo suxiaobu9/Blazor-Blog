@@ -1,0 +1,39 @@
+﻿@if (PagingModel != null)
+{
+    <div class="flex justify-center">
+        <select @onchange="@PageingChanged" class="border rounded-lg p-2">
+            @for (var i = 1; i <= PagingModel.Total; i++)
+            {
+                if (i == PagingModel.Current)
+                {
+                    <option selected value="@i">@i</option>
+                }
+                else
+                {
+                    <option value="@i">@i</option>
+                }
+            }
+        </select>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public PagingModel? PagingModel { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnPagingChangeEvent { get; set; }
+
+    private Task PageingChanged(ChangeEventArgs e)
+    {
+        return OnPagingChangeEvent.InvokeAsync(e.Value?.ToString());
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        if (PagingModel == null)
+            return base.OnInitializedAsync();
+
+        return base.OnInitializedAsync();
+    }
+}
