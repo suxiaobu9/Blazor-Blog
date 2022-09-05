@@ -1,60 +1,62 @@
-﻿<div class="px-4 pt-4 flex flex-wrap">
-    @foreach (var item in IntroductionAry)
-    {
-        <Article_Introduction Introduction="item"></Article_Introduction>
-    }
+﻿@using Blazor.Blog.Shared.Enum
+
+@inject HttpClient httpClient
+@inject NavigationManager uriHelper
+
+<div class="px-4 pt-4 flex flex-wrap">
+    @if (pagingModel != null && pagingModel.ArticleIntroductions != null)
+        foreach (var item in pagingModel.ArticleIntroductions)
+        {
+            <Article_Introduction Introduction="item"></Article_Introduction>
+        }
 </div>
 
 <Paging PagingModel="pagingModel" OnPagingChangeEvent="PageChanged"></Paging>
 
 @code {
-    private ArticleIntroductionModel[] IntroductionAry => new ArticleIntroductionModel[]
+    [Parameter]
+    public ArticleTypeEnum type { get; set; }
+
+    [Parameter]
+    public int? Page { get; set; }
+
+    private PagingModel pagingModel { get; set; } = new PagingModel
         {
-            new ArticleIntroductionModel
-            {
-                Title = "在.net core中使用Quatuz.net",
-                DisplayDate = new DateTime(2021,9,1),
-                Hints = null,
-                NickName = "dotnet-use-quatuz-net"
-            },
-            new ArticleIntroductionModel
-            {
-                Title = "重灌後Visual Studio沒辦法還原Nuget套件",
-                DisplayDate = new DateTime(2021,9,1),
-                Hints = new string[]{ "https://api.nuget.org/v3/index.json"},
-                NickName = "visual-studio-restore-nuget"
-            },
-            new ArticleIntroductionModel
-            {
-                Title = "Git一次性Push至多個Remote Repository",
-                DisplayDate = new DateTime(2021,8,6),
-                Hints = null,
-                NickName = "git-push-multi-remote-repos"
-            },
-            new ArticleIntroductionModel
-            {
-                Title = "Docker Containers 之間相互溝通",
-                DisplayDate = new DateTime(2021,8,4),
-                Hints = new string[]{ "docker network ls","docker network inspect bridge"},
-                NickName = "docker-containers-connect-to-each-other"
-            },
-            new ArticleIntroductionModel
-            {
-                Title = "EF Core Db first 筆記",
-                DisplayDate = new DateTime(2021,7,23),
-                Hints = null,
-                NickName = "ef-core-db-first-note"
-            }
+            Page = 1,
         };
 
-    private PagingModel pagingModel => new PagingModel
-        {
-            Current = 2,
-            Total = 100
-        };
-
-    public void PageChanged(string page)
+    public async Task PageChanged(string page)
     {
-        Console.WriteLine(page);
+        var response = await httpClient.GetAsync($"/Api/Article/{type.ToString()}?{nameof(page)}={page}");
+
+        if (!response.IsSuccessStatusCode)
+            return;
+
+        var model = await response.Content.ReadFromJsonAsync<PagingModel>();
+
+        if (model == null)
+            return;
+
+        pagingModel = model;
+        uriHelper.NavigateTo($"/{type.ToString()}?{nameof(page)}={page}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        pagingModel.Page = Page ?? 1;
+
+        var response = await httpClient.GetAsync($"/Api/Article/{type.ToString()}?{nameof(pagingModel.Page).ToLower()}={pagingModel?.Page}");
+
+        if (!response.IsSuccessStatusCode)
+            return;
+
+        var model = await response.Content.ReadFromJsonAsync<PagingModel>();
+
+        if (model == null)
+            return;
+
+        pagingModel = model;
     }
 }

@@ -1,10 +1,10 @@
 ﻿@if (PagingModel != null)
 {
-    <div class="flex justify-center">
+    <div class="flex justify-center mb-10">
         <select @onchange="@PageingChanged" class="border rounded-lg p-2">
             @for (var i = 1; i <= PagingModel.Total; i++)
             {
-                if (i == PagingModel.Current)
+                if (i == PagingModel.Page)
                 {
                     <option selected value="@i">@i</option>
                 }

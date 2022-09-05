@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using Blazor.Blog.Server.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<ArticleService>();
 
 var app = builder.Build();
 

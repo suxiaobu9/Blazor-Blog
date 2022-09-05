@@ -1,6 +1,6 @@
-﻿namespace Model;
+﻿namespace Blazor.Blog.Shared.Model;
 
-public class ArticleIntroductionModel
+public record class ArticleIntroductionModel
 {
     public string? Title { get; set; }
 
