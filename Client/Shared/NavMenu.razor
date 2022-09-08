@@ -7,14 +7,15 @@
         </a>
     </div>
     <div class="flex items-center">
-        @foreach(var item in navLinkSettings){
-            <NavLink ActiveClass="bg-zinc-500 !text-white" class="mx-1 border rounded-md p-2 text-zinc-500 border-zinc-300" href="@item.href" Match="NavLinkMatch.Prefix">
+        @foreach (var item in navLinkSettings)
+        {
+            <a class="mx-1 border rounded-md p-2 text-zinc-500 border-zinc-300" href="@item.href">
                 <span class="text-md">
                     @item.title
                 </span>
-            </NavLink>
+            </a>
         }
-       
+
     </div>
 </nav>
 

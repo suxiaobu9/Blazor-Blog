@@ -1,0 +1,33 @@
+﻿@page "/Article/{Nickname}"
+@using Markdig
+@inject HttpClient httpClient
+@inject IJSRuntime jsRuntime
+
+<div class="markdown-body px-4 pt-4 pb-10 max-w-screen">
+    @((MarkupString)htmlContent)
+</div>
+
+@code {
+    [Parameter]
+    public string? Nickname { get; set; }
+
+    private string htmlContent { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var response = await httpClient.GetAsync($"/Api/Article/{Nickname}");
+
+        if (!response.IsSuccessStatusCode)
+            return;
+
+        htmlContent = Markdown.ToHtml(await response.Content.ReadAsStringAsync());
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await jsRuntime.InvokeVoidAsync("Prism.highlightAll");
+    }
+}
+

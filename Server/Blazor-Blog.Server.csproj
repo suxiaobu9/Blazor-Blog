@@ -17,5 +17,10 @@
     <ProjectReference Include="..\Shared\Blazor-Blog.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Markdown\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>

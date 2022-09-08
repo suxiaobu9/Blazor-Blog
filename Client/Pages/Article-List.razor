@@ -27,7 +27,7 @@
 
     public async Task PageChanged(string page)
     {
-        var response = await httpClient.GetAsync($"/Api/Article/{type.ToString()}?{nameof(page)}={page}");
+        var response = await httpClient.GetAsync($"/Api/ArticleIntroductionList/{type.ToString()}?{nameof(page)}={page}");
 
         if (!response.IsSuccessStatusCode)
             return;
@@ -47,7 +47,7 @@
 
         pagingModel.Page = Page ?? 1;
 
-        var response = await httpClient.GetAsync($"/Api/Article/{type.ToString()}?{nameof(pagingModel.Page).ToLower()}={pagingModel?.Page}");
+        var response = await httpClient.GetAsync($"/Api/ArticleIntroductionList/{type.ToString()}?{nameof(pagingModel.Page).ToLower()}={pagingModel?.Page}");
 
         if (!response.IsSuccessStatusCode)
             return;
