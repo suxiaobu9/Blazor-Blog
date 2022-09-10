@@ -14,6 +14,7 @@
 在使用前要先注意一下環境變數是不是 Development (開發環境)
 
 [![image](https://user-images.githubusercontent.com/37999690/125182626-32077300-e242-11eb-9673-54806f34de65.png "image")](https://user-images.githubusercontent.com/37999690/125182626-32077300-e242-11eb-9673-54806f34de65.png)
+
 [![image](https://user-images.githubusercontent.com/37999690/125182630-3c297180-e242-11eb-8ae1-b2c1c92e14a4.png "image")](https://user-images.githubusercontent.com/37999690/125182630-3c297180-e242-11eb-8ae1-b2c1c92e14a4.png)
 
 這個設定會存在 launchSettings.json
@@ -31,7 +32,7 @@
 - Windows : `%APPDATA%\microsoft\UserSecrets\<userSecretsId>\secrets.json`
 - Linux : `~/.microsoft/usersecrets/<userSecretsId>/secrets.json`
 - Mac : `~/.microsoft/usersecrets/<userSecretsId>/secrets.json`
-  [![image](https://user-images.githubusercontent.com/37999690/125182651-6713c580-e242-11eb-8ad5-0143d651bc06.png "image")](https://user-images.githubusercontent.com/37999690/125182651-6713c580-e242-11eb-8ad5-0143d651bc06.png)
+- [![image](https://user-images.githubusercontent.com/37999690/125182651-6713c580-e242-11eb-8ad5-0143d651bc06.png "image")](https://user-images.githubusercontent.com/37999690/125182651-6713c580-e242-11eb-8ad5-0143d651bc06.png)
 
 userSecretsId 會是隨機產生的
 

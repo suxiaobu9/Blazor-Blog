@@ -11,8 +11,10 @@
   ```PM
   # Microsoft.Extensions.Configuration
   dotnet add package Microsoft.Extensions.Configuration
+
   # Microsoft.Extensions.Configuration.Json
   dotnet add package Microsoft.Extensions.Configuration.Json
+
   # Microsoft.Extensions.Configuration.Binder
   dotnet add package Microsoft.Extensions.Configuration.Binder
   ```

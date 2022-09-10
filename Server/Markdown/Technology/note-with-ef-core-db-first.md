@@ -26,6 +26,7 @@
    > 代表需要重 build 一下，或是沒有加入 Microsoft.EntityFrameworkCore.Design
 
 3. 執行完成後會多幾個檔案，包含 EFTestContext 以及和資料庫相對應的 cs model
+
    [![image](https://user-images.githubusercontent.com/37999690/126612695-17851911-36f9-439d-bd92-2031e37e4cf6.png "image")](https://user-images.githubusercontent.com/37999690/126612695-17851911-36f9-439d-bd92-2031e37e4cf6.png)
 
 4. 將 Context 註冊進 Startup

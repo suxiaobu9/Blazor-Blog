@@ -1,4 +1,4 @@
-# 在.net core中使用Quatuz.net
+# 在.net core 中使用 Quatuz.net
 
 ## 環境
 
@@ -13,7 +13,7 @@
 ## 安裝 Quartz.net
 
 - 指令 `dotnet add package Quartz.Extensions.Hosting`
-- nuget UI
+
   [![image](https://user-images.githubusercontent.com/37999690/131617491-ae2c09f2-3ea8-4c3a-9318-8e62fafa6d64.png "image")](https://user-images.githubusercontent.com/37999690/131617491-ae2c09f2-3ea8-4c3a-9318-8e62fafa6d64.png)
 
 ## 實做
@@ -92,6 +92,7 @@ namespace WebApplication2
 設定執行的時間的地方是 `WithCronSchedule("0 0/1 * * * ?")` 以 Cron 表達式來設定 job 時間
 
 執行後每 1 分鐘會執行一次
+
 [![image](https://user-images.githubusercontent.com/37999690/131632834-696b8722-b901-4530-b9d9-2a4dfdc018a6.png "image")](https://user-images.githubusercontent.com/37999690/131632834-696b8722-b901-4530-b9d9-2a4dfdc018a6.png)
 
 ## 簡單改一下
