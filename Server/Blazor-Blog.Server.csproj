@@ -23,4 +23,10 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="App_Offline_Close.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
