@@ -12,6 +12,14 @@ public static partial class ArticleList
     public static Dictionary<string, ArticleIntroductionModel> Recipe => new()
     {
         {
+            "雞腿悶飯",
+            new ArticleIntroductionModel
+            {
+                Title = "雞腿悶飯",
+                DisplayDate = new DateTime(2022, 09, 11),
+            }
+        },
+        {
             "酸梅蜜汁雞排",
             new ArticleIntroductionModel
             {
