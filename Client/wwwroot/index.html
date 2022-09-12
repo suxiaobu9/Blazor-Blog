@@ -16,6 +16,7 @@
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
     <link href="css/markdown/github-markdown-light.css" rel="stylesheet" />
+    <link href="css/loader-spinner.css" rel="stylesheet" />
 
     <link href="css/prism/prism-coy.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" integrity="sha512-Dqf5696xtofgH089BgZJo2lSWTvev4GFo+gA2o4GullFY65rzQVQLQVlzLvYwTo0Bb2Gpb6IqwxYWtoMonfdhQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -23,7 +24,17 @@
 </head>
 
 <body>
-    <div id="app" class="!tracking-widest">Loading...</div>
+    <div id="app" class="!tracking-widest">
+        <div class="loader-container">
+            <div class="loader-spinner">
+                <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="load one" cx="60" cy="60" r="20" pathLength="1" />
+                    <circle class="load two" cx="60" cy="60" r="10" />
+                    <circle class="load three" cx="60" cy="60" r="30" pathLength="1" />
+                </svg>
+            </div>
+        </div>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
