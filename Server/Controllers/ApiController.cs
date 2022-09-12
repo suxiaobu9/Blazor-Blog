@@ -12,20 +12,23 @@ namespace Blazor.Blog.Server.Controllers;
 public class ApiController : ControllerBase
 {
     private readonly ArticleService articleService;
-    private readonly IWebHostEnvironment env;
 
-    public ApiController(ArticleService articleService,
-        IWebHostEnvironment env)
+    public ApiController(ArticleService articleService)
     {
         this.articleService = articleService;
-        this.env = env;
     }
 
+    /// <summary>
+    /// 取得文章列表
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="page"></param>
+    /// <param name="keyword"></param>
+    /// <returns></returns>
     [HttpGet("ArticleIntroductionList/{type}")]
-    public IActionResult ArticleIntroductionList(ArticleTypeEnum type, int? page)
+    public IActionResult ArticleIntroductionList(ArticleTypeEnum type, int? page, string? keyword)
     {
-        page ??= 0;
-        var result = articleService.GetArticleIntroduction(type, page.Value);
+        var result = articleService.GetArticleIntroduction(type, page ?? 1, keyword);
 
         if (result == null)
             return NotFound();
@@ -33,21 +36,19 @@ public class ApiController : ControllerBase
         return Ok(result);
     }
 
+    /// <summary>
+    /// 取得文章內容
+    /// </summary>
+    /// <param name="nickname"></param>
+    /// <returns></returns>
     [HttpGet("Article/{nickname}")]
     public async Task<IActionResult> ArticleAsync(string nickname)
     {
-        var markdownDir = Path.Combine(env.ContentRootPath, "Markdown");
-        var allFiles = Directory.GetFiles(markdownDir, "*.md", SearchOption.AllDirectories);
+        var content = await articleService.GetMdContentAsync(nickname);
 
-        var targetMd = allFiles.FirstOrDefault(x => Path.GetFileNameWithoutExtension(x) == nickname);
-
-        if (targetMd == null)
+        if (content == null)
             return NotFound();
 
-        return Ok(await System.IO.File.ReadAllTextAsync(targetMd));
+        return Ok(content);
     }
-
-
-
-
 }

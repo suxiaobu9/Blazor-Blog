@@ -17,11 +17,13 @@
     {
         await base.OnInitializedAsync();
 
+        // 文章內容
         var response = await httpClient.GetAsync($"/Api/Article/{Nickname}");
 
         if (!response.IsSuccessStatusCode)
             return;
 
+        // 轉 html
         htmlContent = Markdown.ToHtml(await response.Content.ReadAsStringAsync());
     }
 

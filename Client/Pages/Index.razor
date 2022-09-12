@@ -1,11 +1,4 @@
-﻿@page "/"
-@page "/Technology"
+﻿@page "/Technology"
 @using Blazor.Blog.Shared.Enum
 
-<Article_List type="ArticleTypeEnum.Technology" Page="Page"></Article_List>
-
-@code {
-    [Parameter]
-    [SupplyParameterFromQuery]
-    public int? Page{ get; set; }
-}
+<Article_List type="ArticleTypeEnum.Technology"></Article_List>

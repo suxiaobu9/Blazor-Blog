@@ -1,7 +1,15 @@
 ﻿@using Blazor.Blog.Shared.Enum
+@using Blazor.Blog.Client.State
+@using Microsoft.AspNetCore.WebUtilities
 
 @inject HttpClient httpClient
 @inject NavigationManager uriHelper
+@inject KeywordSearchState keywordSearchState
+@implements IDisposable
+
+<div class="flex justify-center mt-4 md:hidden block">
+    <KeywordSearch></KeywordSearch>
+</div>
 
 <div class="px-4 pt-4 flex flex-wrap">
     @if (pagingModel != null && pagingModel.ArticleIntroductions != null)
@@ -17,40 +25,63 @@
     [Parameter]
     public ArticleTypeEnum type { get; set; }
 
-    [Parameter]
-    public int? Page { get; set; }
+    private PagingModel pagingModel { get; set; } = new PagingModel();
 
-    private PagingModel pagingModel { get; set; } = new PagingModel
-        {
-            Page = 1,
-        };
-
-    public async Task PageChanged(string page)
+    public async Task PageChanged(int page)
     {
-        var response = await httpClient.GetAsync($"/Api/ArticleIntroductionList/{type.ToString()}?{nameof(page)}={page}");
-
-        if (!response.IsSuccessStatusCode)
-            return;
-
-        var model = await response.Content.ReadFromJsonAsync<PagingModel>();
-
-        if (model == null)
-            return;
-
-        pagingModel = model;
-        uriHelper.NavigateTo($"/{type.ToString()}?{nameof(page)}={page}");
+        pagingModel.Page = page;
+        await GetArticleList(false);
     }
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
 
-        pagingModel.Page = Page ?? 1;
+        var uri = uriHelper.ToAbsoluteUri(uriHelper.Uri);
 
-        var response = await httpClient.GetAsync($"/Api/ArticleIntroductionList/{type.ToString()}?{nameof(pagingModel.Page).ToLower()}={pagingModel?.Page}");
+        // 因為這邊沒掛路由，所以這樣取 query string
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue(nameof(pagingModel.Page), out var _page))
+            pagingModel.Page = Convert.ToInt32(_page);
+        else
+            pagingModel.Page = 1;
+
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue(nameof(keywordSearchState.Keyword), out var _keyword))
+            keywordSearchState.SetKeyword(_keyword);
+
+        keywordSearchState.OnChange += (async () => await GetArticleList(true));
+        keywordSearchState.OnChange += StateHasChanged;
+
+        await GetArticleList(false);
+    }
+
+    // 取得文章列表
+    private async Task GetArticleList(bool isFromSearch)
+    {
+        // 如果是從關鍵字搜尋來的，就強制導回第一頁
+        if (isFromSearch)
+            pagingModel.Page = 1;
+
+        var queryStringDic = new Dictionary<string, object>();
+
+        queryStringDic.Add(nameof(pagingModel.Page), pagingModel.Page ?? 1);
+
+        if (!string.IsNullOrWhiteSpace(keywordSearchState.Keyword))
+        {
+            queryStringDic.Add(nameof(keywordSearchState.Keyword), keywordSearchState.Keyword);
+        }
+
+        var queryString = string.Join("&", queryStringDic.Select(x => $"{x.Key}={x.Value}").ToArray() ?? Array.Empty<string>());
+
+        // 取文章列表
+        var url = $"/Api/ArticleIntroductionList/{type.ToString()}?{queryString}";
+
+        var response = await httpClient.GetAsync(url);
 
         if (!response.IsSuccessStatusCode)
+        {
+            uriHelper.NavigateTo($"/{type.ToString()}", true);
             return;
+        }
 
         var model = await response.Content.ReadFromJsonAsync<PagingModel>();
 
@@ -58,5 +89,15 @@
             return;
 
         pagingModel = model;
+
+        uriHelper.NavigateTo($"/{type.ToString()}?{queryString}");
+
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        keywordSearchState.OnChange -= (async () => await GetArticleList(true));
+        keywordSearchState.OnChange -= StateHasChanged;
     }
 }

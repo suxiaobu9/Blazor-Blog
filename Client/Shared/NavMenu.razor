@@ -1,28 +1,40 @@
 ﻿@using Blazor.Blog.Shared.Enum
 
+@inject NavigationManager uriHelper
+
+
 <nav class="border-b border-b-1 border-slate-200 flex justify-between px-4">
     <div class="py-4">
-        <a href="" class="text-black text-2xl font-bold">
+        <span @onclick="@(()=>NevigateToUrl($"/{nameof(ArticleTypeEnum.Technology)}"))" class="text-black text-2xl font-bold cursor-pointer">
             OverLoading
-        </a>
+        </span>
+    </div>
+    <div class="py-4 md:block hidden">
+        <KeywordSearch></KeywordSearch>
     </div>
     <div class="flex items-center">
         @foreach (var item in navLinkSettings)
         {
-            <a class="mx-1 border rounded-md p-2 text-zinc-500 border-zinc-300" href="@item.href">
+            <span class="mx-1 border rounded-md p-2 text-zinc-500 border-zinc-300 hover:text-white hover:bg-zinc-500 cursor-pointer" @onclick="@(()=>NevigateToUrl(item.href))">
                 <span class="text-md">
                     @item.title
                 </span>
-            </a>
+            </span>
         }
-
     </div>
 </nav>
 
 @code {
+
     private (string title, string href)[] navLinkSettings => new (string, string)[]
     {
             ("技術",$"/{nameof(ArticleTypeEnum.Technology)}"),
             ("食譜",$"/{nameof(ArticleTypeEnum.Recipe)}")
     };
+
+    private void NevigateToUrl(string href)
+    {
+        uriHelper.NavigateTo(href, true);
+    }
+
 }
