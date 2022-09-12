@@ -7,6 +7,14 @@ public static partial class ArticleList
     public static Dictionary<string, ArticleIntroductionModel> Technology => new()
     {
         {
+            "use-lets-encrypt-to-update-web-site-to-https-free",
+            new ArticleIntroductionModel
+            {
+                Title = "利用 Let's Encrypt 將網站免費升級成 https",
+                DisplayDate = new DateTime(2022,09,12),
+            }
+        },
+        {
             "use-quatuz-with-dotnet-core",
             new ArticleIntroductionModel
             {

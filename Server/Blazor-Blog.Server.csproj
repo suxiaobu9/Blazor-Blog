@@ -24,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Markdown\Technology\use-lets-encrypt-to-update-web-site-to-https-free.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="App_Offline_Close.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
