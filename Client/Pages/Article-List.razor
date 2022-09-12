@@ -63,23 +63,33 @@
 
         var queryStringDic = new Dictionary<string, object>();
 
-        queryStringDic.Add(nameof(pagingModel.Page), pagingModel.Page ?? 1);
+        if (pagingModel.Page != null && pagingModel.Page != 1)
+        {
+            queryStringDic.Add(nameof(pagingModel.Page), pagingModel.Page ?? 1);
+        }
 
         if (!string.IsNullOrWhiteSpace(keywordSearchState.Keyword))
         {
             queryStringDic.Add(nameof(keywordSearchState.Keyword), keywordSearchState.Keyword);
         }
 
-        var queryString = string.Join("&", queryStringDic.Select(x => $"{x.Key}={x.Value}").ToArray() ?? Array.Empty<string>());
+        var queryString = "";
+
+        Console.WriteLine(queryStringDic.Any());
+
+        if (queryStringDic.Any())
+            queryString = "?" + string.Join("&", queryStringDic.Select(x => $"{x.Key}={x.Value}").ToArray() ?? Array.Empty<string>());
 
         // 取文章列表
-        var url = $"/Api/ArticleIntroductionList/{type.ToString()}?{queryString}";
+        var url = $"/Api/ArticleIntroductionList/{type.ToString()}{queryString}";
 
         var response = await httpClient.GetAsync(url);
 
+        var typeString = type == ArticleTypeEnum.Technology ? "" : ("/" + type.ToString());
+
         if (!response.IsSuccessStatusCode)
         {
-            uriHelper.NavigateTo($"/{type.ToString()}", true);
+            uriHelper.NavigateTo($"{typeString}", true);
             return;
         }
 
@@ -90,7 +100,7 @@
 
         pagingModel = model;
 
-        uriHelper.NavigateTo($"/{type.ToString()}?{queryString}");
+        uriHelper.NavigateTo($"{typeString}{queryString}");
 
         StateHasChanged();
     }
