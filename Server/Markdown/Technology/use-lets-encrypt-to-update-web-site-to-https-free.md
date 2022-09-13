@@ -4,7 +4,7 @@
 
 - Azure
 - NoIp
-- Azure Let's Encrypt ###0.6
+- Azure Let's Encrypt 1.0.6
 - [擴充工具 Github](https://github.com/sjkp/letsencrypt-siteextension/wiki/How-to-install)
 
 ## 說明
@@ -67,7 +67,7 @@
 
 - ![image](https://user-images.githubusercontent.com/37999690/189652187-8819f0d6-2147-4e11-b16c-694ae9fdad4f.png)
 
-- ![image](https://user-images.githubusercontent.com/37999690/189653297-a4627cb0-2a2c-4f7a-9942-680bc141030###png)
+- ![image](https://user-images.githubusercontent.com/37999690/189653297-a4627cb0-2a2c-4f7a-9942-680bc1410301.png)
 
 - ![image](https://user-images.githubusercontent.com/37999690/189652568-e0afde04-b082-4df7-a25b-c4bd0c2cfa4e.png)
 
@@ -87,7 +87,7 @@
 
 - ![image](https://user-images.githubusercontent.com/37999690/189655274-bb20d63b-ddd5-4d06-acad-0310459b1219.png)
 
-- 選擇應用程式與接受法律條款
+### 選擇應用程式與接受法律條款
 
 - ![image](https://user-images.githubusercontent.com/37999690/189655569-8d09cdb9-0881-4aa7-8cc2-8da3572a2d16.png)
 
@@ -107,31 +107,31 @@
 
 - ![image](https://user-images.githubusercontent.com/37999690/189658263-09778c14-0048-4e15-92d1-debfd561725b.png)
 
-- Tenant
+- `Tenant`
 
   - ![image](https://user-images.githubusercontent.com/37999690/189664134-b1c8d65a-9c55-4fc9-9b15-d8292af76a90.png)
 
-- SubscriptionId
+- `SubscriptionId`
 
   - ![image](https://user-images.githubusercontent.com/37999690/189664420-52ec00fd-401c-4a56-ba40-321ee9001bea.png)
 
-- ClientId
+- `ClientId`
 
   - ![image](https://user-images.githubusercontent.com/37999690/189664660-e8004550-72b4-453a-9223-25d6a5c38292.png)
 
-- ClientSecret
+- `ClientSecret`
 
   - ![image](https://user-images.githubusercontent.com/37999690/189665239-7cf29baf-34d6-4f6f-9cc2-432ec02760c4.png)
 
-- ResourceGroupName
+- `ResourceGroupName`
 
   - ![image](https://user-images.githubusercontent.com/37999690/189665589-c99fd3bb-3ed5-4bdd-9f58-7254dfe3eed0.png)
 
-- ServicePlanResourceGroupName
+- `ServicePlanResourceGroupName`
 
   - ![image](https://user-images.githubusercontent.com/37999690/189665976-075961fd-1f3e-4aef-8f66-0d17db7289b9.png)
 
-- DashboardConnectionString、StorageConnectionString
+- `DashboardConnectionString`、`StorageConnectionString`
 
   - ![image](https://user-images.githubusercontent.com/37999690/189666122-4855463b-43ff-4cf5-8e07-31e40145d4fe.png)
 
