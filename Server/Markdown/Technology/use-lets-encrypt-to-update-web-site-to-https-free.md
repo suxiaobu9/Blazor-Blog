@@ -4,8 +4,7 @@
 
 - Azure
 - NoIp
-- Azure Let's Encrypt 1.0.6
-- [擴充工具 Github](https://github.com/sjkp/letsencrypt-siteextension/wiki/How-to-install)
+- [Azure Let's Encrypt](https://github.com/sjkp/letsencrypt-siteextension/wiki/How-to-install) 1.0.6
 
 ## 說明
 
