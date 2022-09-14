@@ -75,8 +75,6 @@
 
         var queryString = "";
 
-        Console.WriteLine(queryStringDic.Any());
-
         if (queryStringDic.Any())
             queryString = "?" + string.Join("&", queryStringDic.Select(x => $"{x.Key}={x.Value}").ToArray() ?? Array.Empty<string>());
 
