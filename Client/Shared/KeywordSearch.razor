@@ -16,28 +16,20 @@
         keywordSearchState.SetKeyword(Keyword);
     }
 
-    private void StateChangeKeyword()
-    {
-        Keyword = keywordSearchState.Keyword;
-    }
-
     private void KeyboardEventHandler(KeyboardEventArgs args)
     {
         if (args.Key.ToLower() == "enter")
-            keywordSearchState.SetKeyword(Keyword);
+            SearchClick();
     }
 
     protected override void OnInitialized()
     {
-        keywordSearchState.OnChange += StateChangeKeyword;
-        keywordSearchState.OnChange += StateHasChanged;
         base.OnInitialized();
     }
 
     public void Dispose()
     {
-        keywordSearchState.OnChange -= StateChangeKeyword;
-        keywordSearchState.OnChange -= StateHasChanged;
+        keywordSearchState.CleanAction();
     }
 
 }

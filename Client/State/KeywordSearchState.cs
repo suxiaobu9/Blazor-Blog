@@ -13,4 +13,7 @@ public class KeywordSearchState
     }
 
     private void NotifyStateChanged() => OnChange?.Invoke();
+
+    public void CleanAction() => OnChange = null;
+
 }
