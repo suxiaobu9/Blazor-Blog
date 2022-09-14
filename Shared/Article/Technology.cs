@@ -154,9 +154,9 @@ public static partial class ArticleList
                 DisplayDate = new DateTime(2021,01,27),
                 Hints = new string[]
                 {
-                    "$.each([], function (index, item)",
-                    "$.grep([], function (item, index)",
-                    "$.map([], function (item, index)"
+                    "$.each([], function (index, item){})",
+                    "$.grep([], function (item, index){})",
+                    "$.map([], function (item, index){})"
                 }
             }
         },
