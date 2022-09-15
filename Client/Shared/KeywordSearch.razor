@@ -11,6 +11,12 @@
 @code {
     private string? Keyword { get; set; }
 
+    private void SyncKeyword()
+    {
+        Keyword = keywordSearchState.Keyword;
+        StateHasChanged();
+    }
+
     private void SearchClick()
     {
         keywordSearchState.SetKeyword(Keyword);
@@ -24,12 +30,12 @@
 
     protected override void OnInitialized()
     {
+        keywordSearchState.OnChange += SyncKeyword;
         base.OnInitialized();
     }
 
     public void Dispose()
     {
-        keywordSearchState.CleanAction();
+        keywordSearchState.OnChange -= SyncKeyword;
     }
-
 }

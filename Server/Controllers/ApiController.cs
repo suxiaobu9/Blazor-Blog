@@ -22,13 +22,13 @@ public class ApiController : ControllerBase
     /// 取得文章列表
     /// </summary>
     /// <param name="type"></param>
-    /// <param name="page"></param>
+    /// <param name="currentPage"></param>
     /// <param name="keyword"></param>
     /// <returns></returns>
     [HttpGet("ArticleIntroductionList/{type}")]
-    public IActionResult ArticleIntroductionList(ArticleTypeEnum type, int? page, string? keyword)
+    public IActionResult ArticleIntroductionList(ArticleTypeEnum type, int? currentPage, string? keyword)
     {
-        var result = articleService.GetArticleIntroduction(type, page ?? 1, keyword);
+        var result = articleService.GetArticleIntroduction(type, currentPage ?? 1, keyword);
 
         if (result == null)
             return NotFound();

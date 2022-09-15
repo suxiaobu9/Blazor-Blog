@@ -2,9 +2,9 @@
 
 public class PagingModel
 {
-    public int? Total { get; set; }
+    public int? TotalPage { get; set; }
 
-    public int? Page { get; set; }
+    public int? CurrentPage { get; set; }
 
     public ArticleIntroductionModel[]? ArticleIntroductions { get; set; }
 }

@@ -23,66 +23,67 @@
 
 @code {
     [Parameter]
-    public ArticleTypeEnum type { get; set; }
+    public ArticleTypeEnum Type { get; set; }
+
+    [Parameter]
+    public int? CurrentPage { get; set; }
+
+    [Parameter]
+    public string? Keyword { get; set; }
 
     private PagingModel pagingModel { get; set; } = new PagingModel();
 
-    public async Task PageChanged(int page)
+    public void PageChanged(int page)
     {
-        pagingModel.Page = page;
-        await GetArticleList(false);
+        pagingModel.CurrentPage = page;
+
+        var type = Type == ArticleTypeEnum.Technology ? "" : Type.ToString();
+        var queryString = GetNavigateToUrlQueryString();
+
+        uriHelper.NavigateTo($"/{type}{queryString}");
     }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        await base.OnInitializedAsync();
+        pagingModel.CurrentPage = CurrentPage;
+        keywordSearchState.SetKeyword(Keyword);
 
-        var uri = uriHelper.ToAbsoluteUri(uriHelper.Uri);
-
-        // 因為這邊沒掛路由，所以這樣取 query string
-        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue(nameof(pagingModel.Page), out var _page))
-            pagingModel.Page = Convert.ToInt32(_page);
-        else
-            pagingModel.Page = 1;
-
-        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue(nameof(keywordSearchState.Keyword), out var _keyword))
-            keywordSearchState.SetKeyword(_keyword);
-
-        keywordSearchState.OnChange += (async () => await GetArticleList(true));
-
-        await GetArticleList(false);
+        await GetArticleListAsync();
+        await base.OnParametersSetAsync();
     }
 
-    // 取得文章列表
-    private async Task GetArticleList(bool isFromSearch)
+    protected override Task OnInitializedAsync()
     {
-        // 如果是從關鍵字搜尋來的，就強制導回第一頁
-        if (isFromSearch)
-            pagingModel.Page = 1;
+        keywordSearchState.OnChange += SetKeyword;
+        return base.OnInitializedAsync();
+    }
 
-        var queryStringDic = new Dictionary<string, object>();
-
-        if (pagingModel.Page != null && pagingModel.Page != 1)
+    private void SetKeyword()
+    {
+        // 處理換業
+        if (Keyword != keywordSearchState.Keyword)
         {
-            queryStringDic.Add(nameof(pagingModel.Page), pagingModel.Page ?? 1);
+            Keyword = keywordSearchState.Keyword;
+            pagingModel.CurrentPage = 1;
         }
 
-        if (!string.IsNullOrWhiteSpace(keywordSearchState.Keyword))
-        {
-            queryStringDic.Add(nameof(keywordSearchState.Keyword), keywordSearchState.Keyword);
-        }
+        var type = Type == ArticleTypeEnum.Technology ? "" : Type.ToString();
 
-        var queryString = "";
+        var queryString = GetNavigateToUrlQueryString();
 
-        if (queryStringDic.Any())
-            queryString = "?" + string.Join("&", queryStringDic.Select(x => $"{x.Key}={x.Value}").ToArray() ?? Array.Empty<string>());
+        uriHelper.NavigateTo($"/{type}{queryString}");
+    }
+
+    private async Task GetArticleListAsync()
+    {
+        var queryString = GetNavigateToUrlQueryString();
 
         // 取文章列表
-        var url = $"/Api/ArticleIntroductionList/{type.ToString()}{queryString}";
+        var url = $"/Api/ArticleIntroductionList/{Type.ToString()}{queryString}";
 
         var response = await httpClient.GetAsync(url);
 
-        var typeString = type == ArticleTypeEnum.Technology ? "" : ("/" + type.ToString());
+        var typeString = Type == ArticleTypeEnum.Technology ? "" : ("/" + Type.ToString());
 
         if (!response.IsSuccessStatusCode)
         {
@@ -96,14 +97,32 @@
             return;
 
         pagingModel = model;
+    }
 
-        uriHelper.NavigateTo($"{typeString}{queryString}");
+    private string GetNavigateToUrlQueryString(int? page = null, string? keyword = null)
+    {
+        var queryStringDic = new Dictionary<string, object>();
 
-        StateHasChanged();
+        if (pagingModel.CurrentPage != null && pagingModel.CurrentPage != 1)
+        {
+            queryStringDic.Add(nameof(pagingModel.CurrentPage), pagingModel.CurrentPage ?? 1);
+        }
+
+        if (!string.IsNullOrWhiteSpace(Keyword))
+        {
+            queryStringDic.Add(nameof(Keyword), Keyword);
+        }
+
+        var queryString = "";
+
+        if (queryStringDic.Any())
+            queryString = "?" + string.Join("&", queryStringDic.Select(x => $"{x.Key}={x.Value}").ToArray() ?? Array.Empty<string>());
+
+        return queryString;
     }
 
     public void Dispose()
     {
-        keywordSearchState.CleanAction();
+        keywordSearchState.OnChange -= SetKeyword;
     }
 }

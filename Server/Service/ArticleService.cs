@@ -39,8 +39,8 @@ public class ArticleService
 
         return new PagingModel
         {
-            Page = page,
-            Total = (articleList.Count() / pageSize) + 1,
+            CurrentPage = page,
+            TotalPage = (articleList.Count() / pageSize) + 1,
             ArticleIntroductions = articleList
             .Skip(skipPages).Take(pageSize)
             .ToArray()

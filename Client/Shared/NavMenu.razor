@@ -5,9 +5,9 @@
 
 <nav class="border-b border-b-1 border-slate-200 flex justify-between px-4">
     <div class="py-4">
-        <span @onclick="@(()=>NevigateToUrl("/"))" class="text-black text-2xl font-bold cursor-pointer">
+        <a href="/" class="text-black text-2xl font-bold cursor-pointer">
             OverLoading
-        </span>
+        </a>
     </div>
     <div class="py-4 md:block hidden">
         <KeywordSearch></KeywordSearch>
@@ -15,11 +15,11 @@
     <div class="flex items-center">
         @foreach (var item in navLinkSettings)
         {
-            <span class="mx-1 border rounded-md p-2 text-zinc-500 border-zinc-300 hover:text-white hover:bg-zinc-500 cursor-pointer" @onclick="@(()=>NevigateToUrl(item.href))">
+            <a href="@item.href" class="mx-1 border rounded-md p-2 text-zinc-500 border-zinc-300 hover:text-white hover:bg-zinc-500 cursor-pointer">
                 <span class="text-md">
                     @item.title
                 </span>
-            </span>
+            </a>
         }
     </div>
 </nav>
@@ -31,10 +31,5 @@
             ("技術",$"/"),
             ("食譜",$"/{nameof(ArticleTypeEnum.Recipe)}")
     };
-
-    private void NevigateToUrl(string href)
-    {
-        uriHelper.NavigateTo(href, true);
-    }
 
 }
