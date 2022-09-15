@@ -939,3 +939,7 @@
 .markdown-body ::-webkit-calendar-picker-indicator {
   filter: invert(50%);
 }
+
+code span{
+    white-space:break-spaces;
+}
