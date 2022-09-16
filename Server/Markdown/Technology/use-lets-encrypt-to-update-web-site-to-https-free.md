@@ -151,3 +151,9 @@
 - ![image](https://user-images.githubusercontent.com/37999690/189669633-45c7cd71-def9-497b-8357-4c1fe9d3a4b5.png)
 
 - ![image](https://user-images.githubusercontent.com/37999690/189669924-9b3df1a6-ec12-40a4-8d8f-291f1abba9b7.png)
+
+### 自動更新憑證
+
+- 在設定完成後 App Service 會新增一支 WebJob 來自動更新憑證，在更新網站時需要注意不要將此 WebJob 刪除，或是另外新增一個 App Service 來放這個 WebJob 也可以
+
+  ![image](https://user-images.githubusercontent.com/37999690/190582392-8b3b02e4-efa5-409d-8a08-ecf77932ecc1.png)
