@@ -1,4 +1,4 @@
-﻿# 利用 Let's Encrypt 將網站免費升級成 https
+﻿# 利用 Let's Encrypt 將 Azure App Service 網站免費升級成 https
 
 ## 環境
 
