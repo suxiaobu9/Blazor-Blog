@@ -162,8 +162,10 @@
 - 指令
 
   - 需要先安裝 [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=powershell) 需要以系統管理員開啟 Powershell
+  - 安裝完成後需要重新開啟 Powershell
 
     ```powershell
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
     $ProgressPreference = 'SilentlyContinue';
     Invoke-WebRequest `
     -Uri https://aka.ms/installazurecliwindows `
