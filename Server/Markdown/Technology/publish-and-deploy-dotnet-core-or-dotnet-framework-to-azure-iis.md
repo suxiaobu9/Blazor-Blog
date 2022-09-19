@@ -3,6 +3,9 @@
 ## 環境
 
 - 已安裝 Visual Studio (msbuild)
+- .NET 6 SDK
+- msdeploy
+- Azure CLI
 
 ## 打包
 
@@ -157,6 +160,18 @@
   ![image](https://user-images.githubusercontent.com/37999690/190949072-cc519e2e-58af-4ac5-bfd6-a309ccfb6a49.png)
 
 - 指令
+
+  - 需要先安裝 [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=powershell) 需要以系統管理員開啟 Powershell
+
+    ```powershell
+    $ProgressPreference = 'SilentlyContinue';
+    Invoke-WebRequest `
+    -Uri https://aka.ms/installazurecliwindows `
+    -OutFile .\AzureCLI.msi; Start-Process msiexec.exe `
+    -Wait `
+    -ArgumentList '/I AzureCLI.msi /quiet';
+    rm .\AzureCLI.msi
+    ```
 
   ```powershell
 
