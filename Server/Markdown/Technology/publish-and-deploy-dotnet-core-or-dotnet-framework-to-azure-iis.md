@@ -195,7 +195,7 @@
   $slot = 'staging'
 
   # 壓縮檔案
-  Compress-Archive "$output\*" $webAppZip --force
+  Compress-Archive "$output\*" $webAppZip -F
 
   #登入 azure
   az login `
