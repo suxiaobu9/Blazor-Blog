@@ -187,6 +187,7 @@
       -p $pw `
       --tenant $tenant
 
+  # 刪除舊的 slot，如果沒有的話會自動跳過
   az webapp `
       deployment `
       slot `
@@ -195,6 +196,7 @@
       --resource-group $resourceGroup `
       --slot $slot
 
+  # 建立 slot
   az webapp `
       deployment `
       slot `
@@ -204,6 +206,8 @@
       --configuration-source $appServiceName `
       --slot $slot
 
+  # 將 slot 設定成 auto swap，slot 的程式更新後會自動暖機、並 swap slot
+  # 設定同開啟 slot 組態中的 一般設定 > 部署位置 > 啟用自動交換
   az webapp `
       deployment `
       slot `
@@ -212,6 +216,7 @@
       --resource-group $resourceGroup `
       --slot $slot
 
+  # 將打包好的程式更新到 slot
   az webapp `
       deploy `
       --resource-group $resourceGroup `
