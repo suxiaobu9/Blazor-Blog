@@ -12,6 +12,24 @@ public static partial class ArticleList
             {
                 Title = "將 .NET 程式打包與佈署到 Azure App Service 上的幾種方式(Windows OS)",
                 DisplayDate = new DateTime(2022, 09, 19),
+                SEOKeywords = new string[]
+                {
+                    "azure cli",
+                    "msbuild",
+                    "azure",
+                    "publish",
+                    "deploy",
+                    "develop",
+                    "development",
+                    ".net framework",
+                    ".net framework 4.8",
+                    "dotnet",
+                    ".net",
+                    "dotnet core",
+                    ".net core",
+                    "dotnet 6",
+                    ".net 6",
+                }
             }
         },
         {
@@ -20,6 +38,15 @@ public static partial class ArticleList
             {
                 Title = "利用 Let's Encrypt 將 Azure App Service 網站免費升級成 https",
                 DisplayDate = new DateTime(2022, 09, 12),
+                SEOKeywords = new string[] 
+                {
+                    "Let's Encrypt",
+                    "https",
+                    "azure",
+                    "app service",
+                    "free",
+                    "ssl"
+                }
             }
         },
         {

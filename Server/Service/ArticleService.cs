@@ -51,14 +51,33 @@ public class ArticleService
     /// </summary>
     /// <param name="nickname"></param>
     /// <returns></returns>
-    public async Task<string?> GetMdContentAsync(string nickname)
+    public async Task<ArticleModel?> GetMdContentAsync(string nickname)
     {
+        var tech = ArticleList.Technology.ContainsKey(nickname);
+        var recipe = ArticleList.Recipe.ContainsKey(nickname);
+
+        if (!tech && !recipe)
+            return null;
+
+
+        var targetDic = tech ?
+            ArticleList.Technology.FirstOrDefault(x => x.Key == nickname) :
+            ArticleList.Recipe.FirstOrDefault(x => x.Key == nickname);
+
+        var result = new ArticleModel
+        {
+            Description = $"{targetDic.Key} - {targetDic.Value.Title}",
+            SEOKeyword = string.Join(",", targetDic.Value.SEOKeywords ?? Array.Empty<string>())
+        };
+
         var targetMd = GetFilePath(nickname);
 
         if (targetMd == null)
             return null;
 
-        return await File.ReadAllTextAsync(targetMd);
+        result.MarkdownContent = await File.ReadAllTextAsync(targetMd);
+
+        return result;
     }
 
     /// <summary>

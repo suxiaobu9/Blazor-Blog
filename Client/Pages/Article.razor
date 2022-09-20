@@ -2,16 +2,23 @@
 @using Markdig
 @inject HttpClient httpClient
 @inject IJSRuntime jsRuntime
+@inject NavigationManager urlHelper
+
+<meta name="keywords" content="@(articleModel?.SEOKeyword ?? "")">
+
+<meta name="description" content="@(articleModel?.Description ?? "")">
 
 <div class="markdown-body px-4 pt-4 pb-10 max-w-screen">
-    @((MarkupString)htmlContent)
+    @((MarkupString)(htmlContent ?? ""))
 </div>
 
 @code {
     [Parameter]
     public string? Nickname { get; set; }
 
-    private string htmlContent { get; set; } = "";
+    private ArticleModel? articleModel { get; set; }
+
+    private string? htmlContent { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -21,10 +28,24 @@
         var response = await httpClient.GetAsync($"/Api/Article/{Nickname}");
 
         if (!response.IsSuccessStatusCode)
+        {
+            urlHelper.NavigateTo("/", true);
             return;
+        }
+
+        articleModel = await response.Content.ReadFromJsonAsync<ArticleModel>();
+
+        if (articleModel == null)
+        {
+            urlHelper.NavigateTo("/", true);
+            return;
+        }
+
+
+
 
         // 轉 html
-        htmlContent = Markdown.ToHtml(await response.Content.ReadAsStringAsync());
+        htmlContent = Markdown.ToHtml(articleModel.MarkdownContent ?? "");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

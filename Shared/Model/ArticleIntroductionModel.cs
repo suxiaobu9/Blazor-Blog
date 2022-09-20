@@ -9,4 +9,6 @@ public record class ArticleIntroductionModel
     public DateTime? DisplayDate { get; set; }
 
     public string[]? Hints { get; set; }
+
+    public string[]? SEOKeywords { get; set; } 
 }
