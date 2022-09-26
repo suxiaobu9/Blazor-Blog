@@ -1,19 +1,8 @@
 ﻿@inherits LayoutComponentBase
 
-@inject IJSRuntime jsRuntime
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
 
-@if (!CheckVersion)
-{
-    <div class="loader-container">
-        <div class="loader-spinner">
-            <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                <circle class="load one" cx="60" cy="60" r="20" pathLength="1" />
-                <circle class="load two" cx="60" cy="60" r="10" />
-                <circle class="load three" cx="60" cy="60" r="30" pathLength="1" />
-            </svg>
-        </div>
-    </div>
-}
 <main class="flex justify-center">
     <div class="2xl:w-[1400px] xl:w-[1200px] lg:w-[1000px] md:w-[800px] w-screen">
         <NavMenu></NavMenu>
@@ -22,10 +11,25 @@
 </main>
 
 @code {
-    private bool CheckVersion { get; set; } = true;
 
     protected override async Task OnInitializedAsync()
     {
+        await RegisterForUpdateAvailableNotification();
         await base.OnInitializedAsync();
     }
+
+    private async Task RegisterForUpdateAvailableNotification()
+    {
+        await JSRuntime.InvokeAsync<object>(
+            identifier: "registerForUpdateAvailableNotification",
+            DotNetObjectReference.Create(this),
+            nameof(OnUpdateAvailable));
+    }
+
+    [JSInvokable(nameof(OnUpdateAvailable))]
+    public void OnUpdateAvailable()
+    {
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
+    }
+
 }

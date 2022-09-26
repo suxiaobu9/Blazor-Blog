@@ -594,10 +594,6 @@ video {
   display: flex;
 }
 
-.\!hidden {
-  display: none !important;
-}
-
 .hidden {
   display: none;
 }
