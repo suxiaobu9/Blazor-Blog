@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Markdown\Technology\blazor-webassembly-auto-update-client-version.md" />
     <None Remove="Markdown\Technology\use-lets-encrypt-to-update-web-site-to-https-free.md" />
   </ItemGroup>
 

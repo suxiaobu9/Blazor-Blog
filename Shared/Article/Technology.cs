@@ -1,4 +1,6 @@
 ﻿using Blazor.Blog.Shared.Model;
+using Microsoft.VisualBasic;
+using System;
 
 namespace Blazor.Blog.Shared.Article;
 
@@ -6,6 +8,27 @@ public static partial class ArticleList
 {
     public static Dictionary<string, ArticleIntroductionModel> Technology => new()
     {
+        {
+            "blazor-webassembly-auto-update-client-version",
+            new ArticleIntroductionModel
+            {
+                Title = "Blazor WebAssembly PWA 自動更新 Client 端程式版本",
+                DisplayDate = new DateTime(2022, 09, 27),
+                SEOKeywords = new string[]
+                {
+                    "Blazor",
+                    "Blazor WebAssembly",
+                    "Blazor WebAssembly PWA",
+                    "client",
+                    "auto update",
+                    "version",
+                },
+                Hints = new string[]
+                {
+                    "Blazor WebAssembly PWA",
+                }
+            }
+        },
         {
             "publish-and-deploy-dotnet-core-or-dotnet-framework-to-azure-iis",
             new ArticleIntroductionModel
@@ -29,6 +52,11 @@ public static partial class ArticleList
                     ".net core",
                     "dotnet 6",
                     ".net 6",
+                },
+                Hints = new string[]
+                {
+                    "Azure App Service",
+                    "Azure CLI",
                 }
             }
         },
@@ -38,7 +66,7 @@ public static partial class ArticleList
             {
                 Title = "利用 Let's Encrypt 將 Azure App Service 網站免費升級成 https",
                 DisplayDate = new DateTime(2022, 09, 12),
-                SEOKeywords = new string[] 
+                SEOKeywords = new string[]
                 {
                     "Let's Encrypt",
                     "https",
@@ -46,6 +74,10 @@ public static partial class ArticleList
                     "app service",
                     "free",
                     "ssl"
+                },
+                Hints = new string[]
+                {
+                    "Let's Encrypt",
                 }
             }
         },
