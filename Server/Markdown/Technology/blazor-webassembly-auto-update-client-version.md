@@ -99,9 +99,7 @@ window.updateAvailable = new Promise((resolve, reject) => {
   navigator.serviceWorker
     .register("/service-worker.js")
     .then((registration) => {
-      console.info(
-        `Service worker registration successful (scope: ${registration.scope})`
-      );
+      console.info(`Service worker registration successful (scope: ${registration.scope})`);
 
       registration.onupdatefound = () => {
         const installingServiceWorker = registration.installing;
@@ -143,27 +141,30 @@ window.registerForUpdateAvailableNotification = (caller, methodName) => {
 
 ### MainLayout.razor 加入以下程式碼
 
-```razor
+```csharp
 @inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
 
-protected override async Task OnInitializedAsync()
+@code
 {
-    await RegisterForUpdateAvailableNotification();
-}
+  protected override async Task OnInitializedAsync()
+  {
+      await RegisterForUpdateAvailableNotification();
+  }
 
-private async Task RegisterForUpdateAvailableNotification()
-{
-    await JSRuntime.InvokeAsync<object>(
-        identifier: "registerForUpdateAvailableNotification",
-        DotNetObjectReference.Create(this),
-        nameof(OnUpdateAvailable));
-}
+  private async Task RegisterForUpdateAvailableNotification()
+  {
+      await JSRuntime.InvokeAsync<object>(
+          identifier: "registerForUpdateAvailableNotification",
+          DotNetObjectReference.Create(this),
+          nameof(OnUpdateAvailable));
+  }
 
-[JSInvokable(nameof(OnUpdateAvailable))]
-public Task OnUpdateAvailable()
-{
-    NavigationManager.NavigateTo("", true);
+  [JSInvokable(nameof(OnUpdateAvailable))]
+  public Task OnUpdateAvailable()
+  {
+      NavigationManager.NavigateTo("", true);
+  }
 }
 
 ```
