@@ -1,4 +1,4 @@
-# 將 .NET 程式打包與佈署到 Azure App Service 上的幾種方式 (Windows OS)
+# 將 .NET 程式打包與部署到 Azure App Service 上的幾種方式 (Windows OS)
 
 ## 環境
 

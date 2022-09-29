@@ -33,7 +33,7 @@ public static partial class ArticleList
             "publish-and-deploy-dotnet-core-or-dotnet-framework-to-azure-iis",
             new ArticleIntroductionModel
             {
-                Title = "將 .NET 程式打包與佈署到 Azure App Service 上的幾種方式(Windows OS)",
+                Title = "將 .NET 程式打包與部署到 Azure App Service 上的幾種方式(Windows OS)",
                 DisplayDate = new DateTime(2022, 09, 19),
                 SEOKeywords = new string[]
                 {
