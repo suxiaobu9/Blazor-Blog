@@ -19,7 +19,7 @@
 
 ![image](https://user-images.githubusercontent.com/37999690/193398149-6586edbb-a0ac-4a92-b7f8-d7e75e95ba2d.png)
 
-## @oninput
+## 利用 oninput 取得輸入的值
 
 輸入任何東西值都會即時變化
 
