@@ -1,8 +1,6 @@
 ﻿using Blazor.Blog.Shared.Model;
-using Microsoft.VisualBasic;
-using System;
 
-namespace Blazor.Blog.Shared.Article;
+namespace Blazor.Blog.Server.Article;
 
 public static partial class ArticleList
 {
@@ -229,3 +227,4 @@ public static partial class ArticleList
         },
     };
 }
+

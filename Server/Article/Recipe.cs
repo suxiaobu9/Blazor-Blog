@@ -1,11 +1,6 @@
 ﻿using Blazor.Blog.Shared.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Blazor.Blog.Shared.Article;
+namespace Blazor.Blog.Server.Article;
 
 public static partial class ArticleList
 {

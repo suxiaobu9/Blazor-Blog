@@ -1,4 +1,4 @@
-﻿using Blazor.Blog.Shared.Article;
+﻿using Blazor.Blog.Server.Article;
 using Blazor.Blog.Shared.Enum;
 using Blazor.Blog.Shared.Model;
 
