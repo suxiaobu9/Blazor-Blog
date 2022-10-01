@@ -1,4 +1,5 @@
 ﻿using Blazor.Blog.Shared.Model;
+using Microsoft.AspNetCore.Components;
 
 namespace Blazor.Blog.Server.Article;
 
@@ -6,6 +7,27 @@ public static partial class ArticleList
 {
     public static Dictionary<string, ArticleIntroductionModel> Technology => new()
     {
+        {
+            "blazor-get-value-immediately",
+            new ArticleIntroductionModel
+            {
+                Title = "Blazor 立刻取得值的方法",
+                DisplayDate = new DateTime(2022, 10, 1),
+                SEOKeywords = new string[]
+                {
+                    "Blazor",
+                    "bind",
+                    "oninput",
+                    "ChangeEventArgs",
+                },
+                Hints = new string[]
+                {
+                    "Blazor",
+                    "bind",
+                    "oninput",
+                }
+            }
+        },
         {
             "blazor-webassembly-auto-update-client-version",
             new ArticleIntroductionModel
