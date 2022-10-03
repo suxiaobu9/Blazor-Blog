@@ -60,7 +60,6 @@
 
   $sln = 'D:\SourceCode\dotnet_6_mvc\dotnet_6_mvc.sln'
   $output = 'D:\Publish\dotnet_6_mvc'
-  $webAppZip = "$output\webApp.zip"
   $buildConfiguration = 'Release'
   $EnvironmentName = 'Production'
 
