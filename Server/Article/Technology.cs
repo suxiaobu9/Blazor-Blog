@@ -50,22 +50,19 @@ public static partial class ArticleList
             }
         },
         {
-            "publish-and-deploy-dotnet-core-or-dotnet-framework-to-azure-iis",
+            "publish-and-deploy-dotnet-6-to-azure-iis",
             new ArticleIntroductionModel
             {
-                Title = "將 .NET 程式打包與部署到 Azure App Service 上的幾種方式(Windows OS)",
+                Title = "將 .NET 6 程式打包與部署到 Azure App Service 上 (Windows OS)",
                 DisplayDate = new DateTime(2022, 09, 19),
                 SEOKeywords = new string[]
                 {
                     "azure cli",
-                    "msbuild",
                     "azure",
                     "publish",
                     "deploy",
                     "develop",
                     "development",
-                    ".net framework",
-                    ".net framework 4.8",
                     "dotnet",
                     ".net",
                     "dotnet core",
@@ -77,6 +74,49 @@ public static partial class ArticleList
                 {
                     "Azure App Service",
                     "Azure CLI",
+                }
+            }
+        },
+        {
+            "publish-and-deploy-dotnet-framework-to-azure-iis",
+            new ArticleIntroductionModel
+            {
+                Title = "將 .NET Framework 程式打包與部署到 Azure App Service 上 (Windows OS)",
+                DisplayDate = new DateTime(2022, 09, 19),
+                SEOKeywords = new string[]
+                {
+                    "msbuild",
+                    "azure",
+                    "publish",
+                    "deploy",
+                    "develop",
+                    "development",
+                    ".net framework",
+                    ".net framework 4.8",
+                    "dotnet",
+                    ".net",
+                },
+                Hints = new string[]
+                {
+                    "Azure App Service",
+                    "Azure CLI",
+                    ".net framework",
+                }
+            }
+        },
+        {
+            "assigh-user-role-to-azure-service",
+            new ArticleIntroductionModel
+            {
+                Title = "Azure 新增 User Assign 給服務，以及取得 Key",
+                DisplayDate = new DateTime(2022, 09, 19),
+                SEOKeywords = new string[]
+                {
+                    "azure",
+                },
+                Hints = new string[]
+                {
+                    "Azure App Service",
                 }
             }
         },

@@ -24,6 +24,11 @@
     {
         await base.OnInitializedAsync();
 
+        await LoadingArticle();
+    }
+
+    private async Task LoadingArticle()
+    {
         // 文章內容
         var response = await httpClient.GetAsync($"/Api/Article/{Nickname}");
 
@@ -41,16 +46,24 @@
             return;
         }
 
-
-
-
         // 轉 html
         htmlContent = Markdown.ToHtml(articleModel.MarkdownContent ?? "");
+
+        StateHasChanged();
+
+        await jsRuntime.InvokeVoidAsync("OnScrollEvent");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await jsRuntime.InvokeVoidAsync("Prism.highlightAll");
     }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+        await LoadingArticle();
+    }
+
 }
 
