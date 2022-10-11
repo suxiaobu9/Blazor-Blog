@@ -14,9 +14,13 @@ variables:
   EnvironmentName: 'Production'
 
 steps:
-- script: dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:EnvironmentName=$(EnvironmentName)
-  displayName: 'dotnet build $(buildConfiguration)'
-
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      dotnet clean --configuration $(buildConfiguration)
+      dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:EnvironmentName=$(EnvironmentName)
+      
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
