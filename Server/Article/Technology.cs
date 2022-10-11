@@ -8,6 +8,24 @@ public static partial class ArticleList
     public static Dictionary<string, ArticleIntroductionModel> Technology => new()
     {
         {
+            "hyper-v-cli",
+            new ArticleIntroductionModel
+            {
+                Title = "利用 Powershell 新增、匯入、匯出 VM",
+                DisplayDate = new DateTime(2022, 10, 1),
+                SEOKeywords = new string[]
+                {
+                    "hyper-v",
+                    "vm",
+                },
+                Hints = new string[]
+                {
+                    "hyper-v",
+                    "vm",
+                }
+            }
+        },
+        {
             "blazor-get-value-immediately",
             new ArticleIntroductionModel
             {
