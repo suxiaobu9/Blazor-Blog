@@ -37,10 +37,17 @@ public class ArticleService
 
         var articleList = KeywordFilter(source, keyword);
 
+        var totalPage = 1;
+
+        if (articleList.Any())
+        {
+            totalPage = articleList.Count() / pageSize +( articleList.Count() % page == 0 ? 0 : 1);
+        }
+
         return new PagingModel
         {
             CurrentPage = page,
-            TotalPage = (articleList.Count() / pageSize) + 1,
+            TotalPage = totalPage,
             ArticleIntroductions = articleList
             .Skip(skipPages).Take(pageSize)
             .ToArray()
