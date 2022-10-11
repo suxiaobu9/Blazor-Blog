@@ -11,7 +11,7 @@ public static partial class ArticleList
             "hyper-v-cli",
             new ArticleIntroductionModel
             {
-                Title = "利用 Powershell 新增、匯入、匯出 VM",
+                Title = "利用 Powershell 新增、匯入、匯出 Hyper-V 虛擬機",
                 DisplayDate = new DateTime(2022, 10, 1),
                 SEOKeywords = new string[]
                 {

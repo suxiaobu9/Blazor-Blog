@@ -1,4 +1,4 @@
-# 利用 Powershell 新增、匯入、匯出 VM
+# 利用 Powershell 新增、匯入、匯出 Hyper-V 虛擬機
 
 ## 前言
 
