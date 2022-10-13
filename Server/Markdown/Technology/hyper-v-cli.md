@@ -59,7 +59,9 @@ Export-VM -Name 'Win-10-2022-10-11-17-12-03' -Path 'D:\Back'
 
 ```powershell
 $date = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
+# 複製後的 VM 名稱
 $VMName = "Win-10-$date"
+# 複製後的 VM 存放位子
 $VMPath = 'D:\Hyper'
 
 $VM = Import-VM `
