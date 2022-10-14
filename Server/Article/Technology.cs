@@ -8,6 +8,24 @@ public static partial class ArticleList
     public static Dictionary<string, ArticleIntroductionModel> Technology => new()
     {
         {
+            "create-dotnet-site-on-iis-by-cli",
+            new ArticleIntroductionModel
+            {
+                Title = "利用指令在 IIS 建立一個 .Net 網站",
+                DisplayDate = new DateTime(2022, 10, 13),
+                SEOKeywords = new string[]
+                {
+                    "Internet Information Services",
+                    "iis",
+                    ".net",
+                },
+                Hints = new string[]
+                {
+                    "iis",
+                }
+            }
+        },
+        {
             "hyper-v-cli",
             new ArticleIntroductionModel
             {
