@@ -61,7 +61,7 @@
   $webAppZip = "$output\dotnet_6_mvc.zip"
 
   # 註 3
-  $tenant = 'miniasp.onmicrosoft.com'
+  $tenant = '******.onmicrosoft.com'
 
   # 註 4
   $appId = '8afd77b8-8ee6-4e69-b43e-8cb07840218f'
