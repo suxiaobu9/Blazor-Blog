@@ -35,22 +35,20 @@ public class ArticleService
         if (source == null)
             return null;
 
-        var articleList = KeywordFilter(source, keyword);
+        var articleList = KeywordFilter(source, keyword).ToArray();
 
         var totalPage = 1;
 
         if (articleList.Any())
         {
-            totalPage = articleList.Count() / pageSize +( articleList.Count() % page == 0 ? 0 : 1);
+            totalPage = articleList.Length / pageSize + (articleList.Length % pageSize == 0 ? 0 : 1);
         }
 
         return new PagingModel
         {
             CurrentPage = page,
             TotalPage = totalPage,
-            ArticleIntroductions = articleList
-            .Skip(skipPages).Take(pageSize)
-            .ToArray()
+            ArticleIntroductions = articleList.Skip(skipPages).Take(pageSize).ToArray()
         };
     }
     /// <summary>
