@@ -1,0 +1,104 @@
+﻿@page "/Article/{Nickname}"
+@using Blazor.Blog.Enum
+@using Blazor.Blog.Model
+@using Markdig
+@inject HttpClient httpClient
+@inject IJSRuntime jsRuntime
+@inject NavigationManager urlHelper
+
+<meta name="keywords" content="@(articleModel?.SEOKeyword ?? "")">
+
+<meta name="description" content="@(articleModel?.Description ?? "")">
+
+<div class="markdown-body px-4 pt-4 pb-10 max-w-screen">
+    @((MarkupString)(htmlContent ?? ""))
+</div>
+
+@code {
+    [Parameter]
+    public string? Nickname { get; set; }
+
+    private ArticleModel? articleModel { get; set; }
+
+    private string? htmlContent { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        await LoadingArticle();
+    }
+
+    private (bool hasNickName, ArticleIntroductionModel? model) ContentNickName(Dictionary<string, ArticleIntroductionModel> articleList)
+    {
+        var hasNickName = articleList.Any(x => x.Key == Nickname);
+
+        if (!hasNickName) return (false, null);
+
+        ArticleIntroductionModel model = articleList.FirstOrDefault(x => x.Key == Nickname).Value;
+
+        model.NickName = Nickname;
+
+        return (true, model);
+
+    }
+
+    private async Task LoadingArticle()
+    {
+        ArticleTypeEnum? articleType = null;
+
+        var checkAry = new (ArticleTypeEnum typeEnum, Dictionary<string, ArticleIntroductionModel> articleList)[]
+        {
+            (ArticleTypeEnum.Technology, ArticleList.Technology),
+            (ArticleTypeEnum.Recipe, ArticleList.Recipe)
+        };
+
+        (bool hasNickName, ArticleIntroductionModel? model) check = (false, null);
+
+        foreach (var item in checkAry)
+        {
+            check = ContentNickName(item.articleList);
+
+            if (check.hasNickName)
+            {
+                articleType = item.typeEnum;
+                break;
+            }
+        }
+
+        if (articleType == null || check.model == null)
+        {
+            urlHelper.NavigateTo("/", true);
+            return;
+        }
+
+        // 文章內容
+        var mdContent = await httpClient.GetStringAsync($"/Markdown/{articleType.ToString()}/{Nickname}.md");
+
+        articleModel = new ArticleModel
+        {
+            Description = $"{check.model.NickName} - {check.model.Title}",
+            SEOKeyword = string.Join(",", check.model.SEOKeywords ?? Array.Empty<string>())
+        };
+
+        // 轉 html
+        htmlContent = Markdown.ToHtml(mdContent ?? "");
+
+        StateHasChanged();
+
+        await jsRuntime.InvokeVoidAsync("OnScrollEvent");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await jsRuntime.InvokeVoidAsync("Prism.highlightAll");
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+        await LoadingArticle();
+    }
+
+}
+

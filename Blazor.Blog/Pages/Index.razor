@@ -1,2 +1,20 @@
 ﻿@page "/"
+@page "/{ArticleType}"
 
+@using Blazor.Blog.Component
+@using Blazor.Blog.Enum
+
+<Article_List ArticleType="@ArticleType" CurrentPage="@CurrentPage" Keyword="@Keyword"></Article_List>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int? CurrentPage { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? Keyword { get; set; }
+
+    [Parameter]
+    public string? ArticleType { get; set; }
+}
