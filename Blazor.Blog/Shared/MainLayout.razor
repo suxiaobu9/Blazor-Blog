@@ -1,17 +1,35 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+<main class="flex justify-center">
+    <div class="2xl:w-[1400px] xl:w-[1200px] lg:w-[1000px] md:w-[800px] w-screen">
+        <NavMenu></NavMenu>
+        @Body
     </div>
+</main>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+@code {
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+    protected override async Task OnInitializedAsync()
+    {
+        await RegisterForUpdateAvailableNotification();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task RegisterForUpdateAvailableNotification()
+    {
+        await JSRuntime.InvokeAsync<object>(
+            identifier: "registerForUpdateAvailableNotification",
+            DotNetObjectReference.Create(this),
+            nameof(OnUpdateAvailable));
+    }
+
+    [JSInvokable(nameof(OnUpdateAvailable))]
+    public void OnUpdateAvailable()
+    {
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
+    }
+
+}
