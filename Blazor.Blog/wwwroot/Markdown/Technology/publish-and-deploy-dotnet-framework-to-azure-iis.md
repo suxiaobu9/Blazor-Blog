@@ -11,7 +11,7 @@
 
 - 利用 msbuild 的 cli 來打包程式會需要另外安裝 msdeploy
 
-  ![image](https://user-images.githubusercontent.com/37999690/190894994-8df0f9bc-d398-4ecc-8f23-1b52f25d9305.png)
+  ![image](https://user-images.githubusercontent.com/37999690/196203871-c92f71c2-c599-4f66-b0a2-fed830c1a165.png)
 
 - 指令
 
