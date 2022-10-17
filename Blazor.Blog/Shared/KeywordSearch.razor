@@ -1,0 +1,43 @@
+﻿@using Blazor.Blog.State
+
+@inject KeywordSearchState keywordSearchState
+@implements IDisposable
+
+@*<input class="p-2 border-zinc-300 border-2 rounded-lg focus:outline-0 focus:border-zinc-400 text-zinc-500"
+       @bind="@Keyword"
+       @oninput="@((e) => { Keyword=e?.Value?.ToString();})"
+       @onkeypress="@KeyboardEventHandler"
+       placeholder="請輸入關鍵字" />
+<button class="ml-2 p-2 border-2 rounded-lg text-zinc-500 hover:text-white hover:bg-zinc-500" @onclick="@SearchClick">搜尋</button>*@
+
+@code {
+    private string? Keyword { get; set; }
+
+    private void SyncKeyword()
+    {
+        Keyword = keywordSearchState.Keyword;
+        StateHasChanged();
+    }
+
+    private void SearchClick()
+    {
+        keywordSearchState.SetKeyword(Keyword);
+    }
+
+    private void KeyboardEventHandler(KeyboardEventArgs args)
+    {
+        if (args.Key.ToLower() == "enter")
+            SearchClick();
+    }
+
+    protected override void OnInitialized()
+    {
+        keywordSearchState.OnChange += SyncKeyword;
+        base.OnInitialized();
+    }
+
+    public void Dispose()
+    {
+        keywordSearchState.OnChange -= SyncKeyword;
+    }
+}
