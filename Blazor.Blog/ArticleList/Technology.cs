@@ -6,6 +6,24 @@ public static partial class ArticleList
     public static Dictionary<string, ArticleIntroductionModel> Technology => new()
     {
         {
+            "assign-azure-rbac-and-create-key",
+            new ArticleIntroductionModel
+            {
+                Title = "指派 Azure RBAC 並新增 Key",
+                DisplayDate = new DateTime(2022, 10, 18),
+                SEOKeywords = new string[]
+                {
+                    "azure",
+                    "RBAC",
+                },
+                Hints = new string[]
+                {
+                    "azure",
+                    "RBAC",
+                }
+            }
+        },
+        {
             "create-and-deploy-azure-static-web-app-by-cli",
             new ArticleIntroductionModel
             {
