@@ -7,11 +7,30 @@ public static partial class ArticleList
     public static Dictionary<string, ArticleIntroductionModel> Recipe => new()
     {
         {
+            "麻油雞飯",
+            new ArticleIntroductionModel
+            {
+                Title = "麻油雞飯",
+                DisplayDate = new DateTime(2022, 10, 18),
+                Hints = new string[]
+                {
+                    "麻油",
+                    "雞腿肉",
+                    "薑"
+                }
+            }
+        },
+        {
             "雞腿悶飯",
             new ArticleIntroductionModel
             {
                 Title = "雞腿悶飯",
                 DisplayDate = new DateTime(2022, 09, 11),
+                Hints = new string[]
+                {
+                    "雞腿肉",
+                    "飯",
+                }
             }
         },
         {
@@ -20,6 +39,11 @@ public static partial class ArticleList
             {
                 Title = "酸梅蜜汁雞排",
                 DisplayDate = new DateTime(2021, 04, 26),
+                Hints = new string[]
+                {
+                    "雞腿肉",
+                    "酸梅",
+                }
             }
         },
         {
@@ -28,6 +52,10 @@ public static partial class ArticleList
             {
                 Title = "滷雞翅",
                 DisplayDate = new DateTime(2021, 03, 16),
+                Hints = new string[]
+                {
+                    "雞翅",
+                }
             }
         },
         {
