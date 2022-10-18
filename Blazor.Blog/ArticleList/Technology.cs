@@ -6,6 +6,26 @@ public static partial class ArticleList
     public static Dictionary<string, ArticleIntroductionModel> Technology => new()
     {
         {
+            "create-and-deploy-azure-static-web-app-by-cli",
+            new ArticleIntroductionModel
+            {
+                Title = "建立 Blazor 的 Azure 靜態網頁並用指令部署",
+                DisplayDate = new DateTime(2022, 10, 18),
+                SEOKeywords = new string[]
+                {
+                    "azure",
+                    "static web app",
+                    "swa",
+                    "blazor",
+                },
+                Hints = new string[]
+                {
+                    "azure static web app",
+                    "blazor",
+                }
+            }
+        },
+        {
             "create-dotnet-site-on-iis-by-cli",
             new ArticleIntroductionModel
             {
