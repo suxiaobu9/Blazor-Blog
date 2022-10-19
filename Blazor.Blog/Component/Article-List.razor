@@ -71,9 +71,6 @@
 
         if (model == null)
         {
-            var typeString = Type == ArticleTypeEnum.Technology ? "" : ("/" + Type.ToString());
-
-            uriHelper.NavigateTo($"{typeString}", true);
             return;
         }
 
