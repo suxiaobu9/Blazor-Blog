@@ -91,10 +91,10 @@ public static partial class ArticleList
             }
         },
         {
-            "奶酪 (微甜配方)",
+            "微甜奶酪",
             new ArticleIntroductionModel
             {
-                Title = "奶酪 (微甜配方)",
+                Title = "微甜奶酪",
                 DisplayDate = new DateTime(2021, 02, 17),
             }
         },
