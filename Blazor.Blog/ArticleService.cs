@@ -1,11 +1,20 @@
 ﻿using Blazor.Blog.Enum;
 using Blazor.Blog.Model;
+using System.Net.Http.Json;
 using System.Reflection;
+using System.Text.Json.Nodes;
 
 namespace Blazor.Blog;
 
 public class ArticleService
 {
+    private readonly HttpClient httpClient;
+
+    public ArticleService(HttpClient httpClient)
+    {
+        this.httpClient = httpClient;
+    }
+
     /// <summary>
     /// 取得文章列表
     /// </summary>
@@ -13,17 +22,12 @@ public class ArticleService
     /// <param name="page"></param>
     /// <param name="keyword"></param>
     /// <returns></returns>
-    public PagingModel? GetArticleIntroduction(ArticleTypeEnum type, int page, string? keyword)
+    public async Task<PagingModel?> GetArticleIntroduction(ArticleTypeEnum type, int page, string? keyword)
     {
         int pageSize = 12,
            skipPages = (page - 1) * pageSize;
 
-        var source = type switch
-        {
-            ArticleTypeEnum.Recipe => ArticleList.Recipe,
-            ArticleTypeEnum.Technology => ArticleList.Technology,
-            _ => null
-        };
+        var source = (await GetArticleList(type)).ToArray();
 
         if (source == null)
             return null;
@@ -51,27 +55,48 @@ public class ArticleService
     /// <param name="source"></param>
     /// <param name="keyword"></param>
     /// <returns></returns>
-    private IEnumerable<ArticleIntroductionModel> KeywordFilter(Dictionary<string, ArticleIntroductionModel> source, string? keyword)
+    private IEnumerable<ArticleIntroductionModel> KeywordFilter(ArticleIntroductionModel[] source, string? keyword)
     {
         return source.Where(x =>
         {
-            var model = x.Value;
-
             if (string.IsNullOrWhiteSpace(keyword))
                 return true;
-            else if (!string.IsNullOrWhiteSpace(x.Key) && x.Key.ToLower().Contains(keyword))
+            else if (!string.IsNullOrWhiteSpace(x.NickName) && x.NickName.ToLower().Contains(keyword))
                 return true;
-            else if (!string.IsNullOrWhiteSpace(model.Title) && model.Title.ToLower().Contains(keyword))
+            else if (!string.IsNullOrWhiteSpace(x.Title) && x.Title.ToLower().Contains(keyword))
                 return true;
 
             return false;
-        }).Select(x =>
-        {
-            var model = x.Value;
-
-            model.NickName = x.Key;
-            return model;
         });
+    }
+
+    public async Task<IEnumerable<ArticleIntroductionModel>> GetArticleList(ArticleTypeEnum? type)
+    {
+        var jsonNameAry = new List<ArticleTypeEnum>();
+
+        if (type == ArticleTypeEnum.Recipe || type == null)
+            jsonNameAry.Add(ArticleTypeEnum.Recipe);
+
+        if (type == ArticleTypeEnum.Technology || type == null)
+            jsonNameAry.Add(ArticleTypeEnum.Technology);
+
+        var tasks = jsonNameAry.Select(x => (x, httpClient.GetFromJsonAsync<ArticleIntroductionModel[]>($"article-list/{x}.json?v={DateTime.UtcNow.Ticks}")));
+
+        var result = new List<ArticleIntroductionModel>();
+
+        foreach ((ArticleTypeEnum articletype, Task<ArticleIntroductionModel[]?> task) item in tasks)
+        {
+            var tmp = await item.task;
+            tmp = tmp?.Select(x =>
+                    {
+                        x.ArticleTypeEnum = item.articletype;
+                        return x;
+                    }).ToArray();
+
+            result.AddRange(tmp ?? Array.Empty<ArticleIntroductionModel>());
+        }
+
+        return result;
     }
 
 }

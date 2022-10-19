@@ -4,6 +4,7 @@
 @using Markdig
 @inject HttpClient httpClient
 @inject IJSRuntime jsRuntime
+@inject ArticleService articleService
 @inject NavigationManager urlHelper
 
 <meta name="keywords" content="@(articleModel?.SEOKeyword ?? "")">
@@ -29,56 +30,37 @@
         await LoadingArticle();
     }
 
-    private (bool hasNickName, ArticleIntroductionModel? model) ContentNickName(Dictionary<string, ArticleIntroductionModel> articleList)
+    private ArticleIntroductionModel? ContentNickName(ArticleIntroductionModel[] articleList)
     {
-        var hasNickName = articleList.Any(x => x.Key == Nickname);
+        var hasNickName = articleList.Any(x => x.NickName == Nickname);
 
-        if (!hasNickName) return (false, null);
+        if (!hasNickName) return null;
 
-        ArticleIntroductionModel model = articleList.FirstOrDefault(x => x.Key == Nickname).Value;
+        ArticleIntroductionModel? model = articleList.FirstOrDefault(x => x.NickName == Nickname);
 
-        model.NickName = Nickname;
-
-        return (true, model);
+        return model;
 
     }
 
     private async Task LoadingArticle()
     {
-        ArticleTypeEnum? articleType = null;
+        var checkAry = (await articleService.GetArticleList(null)).ToArray();
 
-        var checkAry = new (ArticleTypeEnum typeEnum, Dictionary<string, ArticleIntroductionModel> articleList)[]
-        {
-            (ArticleTypeEnum.Technology, ArticleList.Technology),
-            (ArticleTypeEnum.Recipe, ArticleList.Recipe)
-        };
+        var articleModel = ContentNickName(checkAry);
 
-        (bool hasNickName, ArticleIntroductionModel? model) check = (false, null);
-
-        foreach (var item in checkAry)
-        {
-            check = ContentNickName(item.articleList);
-
-            if (check.hasNickName)
-            {
-                articleType = item.typeEnum;
-                break;
-            }
-        }
-
-        if (articleType == null || check.model == null)
+        if (articleModel == null)
         {
             urlHelper.NavigateTo("/", true);
             return;
         }
 
         // 文章內容
-        var mdContent = await httpClient.GetStringAsync($"/Markdown/{articleType.ToString()}/{Nickname}.md");
+        var mdContent = await httpClient.GetStringAsync($"/markdown/{articleModel.ArticleTypeEnum.ToString()}/{Nickname}.md");
 
-        articleModel = new ArticleModel
+        var result = new ArticleModel
         {
-            Description = $"{check.model.NickName} - {check.model.Title}",
-            SEOKeyword = string.Join(",", check.model.SEOKeywords ?? Array.Empty<string>())
+            Description = $"{articleModel.NickName} - {articleModel.Title}",
+            SEOKeyword = string.Join(",", articleModel.SEOKeywords ?? Array.Empty<string>())
         };
 
         // 轉 html

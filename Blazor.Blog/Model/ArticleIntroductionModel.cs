@@ -1,7 +1,11 @@
-﻿namespace Blazor.Blog.Model;
+﻿using Blazor.Blog.Enum;
+
+namespace Blazor.Blog.Model;
 
 public class ArticleIntroductionModel
 {
+    public ArticleTypeEnum? ArticleTypeEnum { get; set; }
+
     public string? Title { get; set; }
 
     public string? NickName { get; set; }
