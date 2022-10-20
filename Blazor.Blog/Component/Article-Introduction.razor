@@ -1,7 +1,7 @@
 ﻿@using Blazor.Blog.Model
 @if (Introduction != null)
 {
-    var articleHref = $"/article/{Introduction.NickName}";
+    var articleHref = $"/{Introduction.ArticleTypeEnum}/{Introduction.NickName}";
 
     <div class="xl:w-1/3 lg:w-1/2 w-full">
         <div class="border rounded-lg mx-2 my-4 px-2 py-4">

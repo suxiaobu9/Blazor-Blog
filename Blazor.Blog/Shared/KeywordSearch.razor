@@ -1,8 +1,5 @@
 ﻿@using Blazor.Blog.State
 
-@inject KeywordSearchState keywordSearchState
-@implements IDisposable
-
 @*<input class="p-2 border-zinc-300 border-2 rounded-lg focus:outline-0 focus:border-zinc-400 text-zinc-500"
        @bind="@Keyword"
        @oninput="@((e) => { Keyword=e?.Value?.ToString();})"
@@ -13,31 +10,22 @@
 @code {
     private string? Keyword { get; set; }
 
-    private void SyncKeyword()
-    {
-        Keyword = keywordSearchState.Keyword;
-        StateHasChanged();
-    }
-
     private void SearchClick()
     {
-        keywordSearchState.SetKeyword(Keyword);
+
     }
 
     private void KeyboardEventHandler(KeyboardEventArgs args)
     {
         if (args.Key.ToLower() == "enter")
-            SearchClick();
+        {
+        
+        }
     }
 
     protected override void OnInitialized()
     {
-        keywordSearchState.OnChange += SyncKeyword;
         base.OnInitialized();
     }
-
-    public void Dispose()
-    {
-        keywordSearchState.OnChange -= SyncKeyword;
-    }
+  
 }

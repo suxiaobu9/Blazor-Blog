@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components;
 namespace Blazor.Blog.Component;
 
 
-public partial class Article_List : IDisposable
+public partial class Article_List
 {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -14,16 +14,10 @@ public partial class Article_List : IDisposable
     private NavigationManager UriHelper { get; set; }
 
     [Inject]
-    private KeywordSearchState KeywordSearchState { get; set; }
-
-    [Inject]
     private ArticleService ArticleService { get; set; }
 
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-
-    [Parameter]
-    public string? ArticleType { get; set; }
-
+   
     [Parameter]
     public int? CurrentPage { get; set; }
 
@@ -32,30 +26,15 @@ public partial class Article_List : IDisposable
 
     private PagingModel PagingModel { get; set; } = new PagingModel();
 
-    private ArticleTypeEnum Type
-    {
-        get
-        {
-            if (!string.IsNullOrWhiteSpace(ArticleType))
-            {
-                ArticleType = ArticleType?.ToLower();
-                ArticleType = string.Concat(ArticleType?[0].ToString().ToUpper(), ArticleType.AsSpan(1));
-            }
-
-            return ArticleType switch
-            {
-                nameof(ArticleTypeEnum.Technology) => ArticleTypeEnum.Technology,
-                nameof(ArticleTypeEnum.Recipe) => ArticleTypeEnum.Recipe,
-                _ => ArticleTypeEnum.Technology,
-            };
-        }
-    }
-
+    /// <summary>
+    /// 換頁
+    /// </summary>
+    /// <param name="page"></param>
     public void PageChanged(int page)
     {
         PagingModel.CurrentPage = page;
 
-        var type = Type == ArticleTypeEnum.Technology ? "" : Type.ToString();
+        var type = ArticleTypeEnum == ArticleTypeEnum.Technology ? "" : ArticleTypeEnum.ToString();
         var queryString = GetQueryString();
 
         UriHelper.NavigateTo($"/{type}{queryString}");
@@ -64,7 +43,6 @@ public partial class Article_List : IDisposable
     protected override async Task OnParametersSetAsync()
     {
         PagingModel.CurrentPage = CurrentPage;
-        KeywordSearchState.SetKeyword(Keyword);
 
         await GetArticleListAsync();
         await base.OnParametersSetAsync();
@@ -72,7 +50,7 @@ public partial class Article_List : IDisposable
 
     private async Task GetArticleListAsync()
     {
-        var model = await ArticleService.GetArticleIntroduction(Type, CurrentPage ?? 1, Keyword);
+        var model = await ArticleService.GetArticleIntroduction(ArticleTypeEnum, CurrentPage ?? 1, Keyword);
 
         if (model == null)
             return;
@@ -82,24 +60,7 @@ public partial class Article_List : IDisposable
 
     protected override Task OnInitializedAsync()
     {
-        KeywordSearchState.OnChange += SetKeyword;
         return base.OnInitializedAsync();
-    }
-
-    private void SetKeyword()
-    {
-        // 處理換頁
-        if (Keyword != KeywordSearchState.Keyword)
-        {
-            Keyword = KeywordSearchState.Keyword;
-            PagingModel.CurrentPage = 1;
-        }
-
-        var type = Type == ArticleTypeEnum.Technology ? "" : Type.ToString();
-
-        var queryString = GetQueryString();
-
-        UriHelper.NavigateTo($"/{type}{queryString}");
     }
 
     /// <summary>
@@ -108,7 +69,7 @@ public partial class Article_List : IDisposable
     /// <param name="page"></param>
     /// <param name="keyword"></param>
     /// <returns></returns>
-    private string GetQueryString(int? page = null, string? keyword = null)
+    private string GetQueryString()
     {
         var queryStringDic = new Dictionary<string, object>();
 
@@ -128,10 +89,5 @@ public partial class Article_List : IDisposable
             queryString = "?" + string.Join("&", queryStringDic.Select(x => $"{x.Key}={x.Value}").ToArray() ?? Array.Empty<string>());
 
         return queryString;
-    }
-
-    public void Dispose()
-    {
-        KeywordSearchState.OnChange -= SetKeyword;
     }
 }

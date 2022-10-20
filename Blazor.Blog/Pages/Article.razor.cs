@@ -36,7 +36,12 @@ public partial class Article
         await LoadingArticle();
     }
 
-    private ArticleIntroductionModel? ContentNickName(ArticleIntroductionModel[] articleList)
+    /// <summary>
+    /// 取得文章
+    /// </summary>
+    /// <param name="articleList"></param>
+    /// <returns></returns>
+    private ArticleIntroductionModel? GetArticleByNickname(ArticleIntroductionModel[] articleList)
     {
         var hasNickName = articleList.Any(x => x.NickName == Nickname);
 
@@ -48,25 +53,29 @@ public partial class Article
 
     }
 
+    /// <summary>
+    /// 讀取文章內容
+    /// </summary>
+    /// <returns></returns>
     private async Task LoadingArticle()
     {
-        var checkAry = (await ArticleService.GetArticleList(null)).ToArray();
+        var checkAry = (await ArticleService.GetArticleList(ArticleTypeEnum)).ToArray();
 
-        var articleModel = ContentNickName(checkAry);
+        var articleIntroduction = GetArticleByNickname(checkAry);
 
-        if (articleModel == null)
+        if (articleIntroduction == null)
         {
             UrlHelper.NavigateTo("/", true);
             return;
         }
 
         // 文章內容
-        var mdContent = await HttpClient.GetStringAsync($"/Markdown/{articleModel.ArticleTypeEnum.ToString()}/{Nickname}.md");
+        var mdContent = await HttpClient.GetStringAsync($"/Markdown/{articleIntroduction.ArticleTypeEnum}/{Nickname}.md?v={DateTime.UtcNow.Ticks}");
 
-        var result = new ArticleModel
+        ArticleModel = new ArticleModel
         {
-            Description = $"{articleModel.NickName} - {articleModel.Title}",
-            SEOKeyword = string.Join(",", articleModel.SEOKeywords ?? Array.Empty<string>())
+            Description = $"{articleIntroduction.NickName} - {articleIntroduction.Title}",
+            SEOKeyword = string.Join(",", articleIntroduction.SEOKeywords ?? Array.Empty<string>())
         };
 
         // 轉 html

@@ -1,6 +1,6 @@
 ﻿namespace Blazor.Blog.State;
 
-public class KeywordSearchState
+public class KeywordSearchState1
 {
     public string? Keyword { get; private set; }
 
