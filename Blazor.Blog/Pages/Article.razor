@@ -55,7 +55,7 @@
         }
 
         // 文章內容
-        var mdContent = await httpClient.GetStringAsync($"/markdown/{articleModel.ArticleTypeEnum.ToString()}/{Nickname}.md");
+        var mdContent = await httpClient.GetStringAsync($"/Markdown/{articleModel.ArticleTypeEnum.ToString()}/{Nickname}.md");
 
         var result = new ArticleModel
         {
