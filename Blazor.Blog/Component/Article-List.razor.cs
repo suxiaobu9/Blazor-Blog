@@ -21,9 +21,6 @@ public partial class Article_List
     [Parameter]
     public int? CurrentPage { get; set; }
 
-    [Parameter]
-    public string? Keyword { get; set; }
-
     private PagingModel PagingModel { get; set; } = new PagingModel();
 
     /// <summary>
@@ -50,7 +47,7 @@ public partial class Article_List
 
     private async Task GetArticleListAsync()
     {
-        var model = await ArticleService.GetArticleIntroduction(ArticleTypeEnum, CurrentPage ?? 1, Keyword);
+        var model = await ArticleService.GetArticleIntroduction(ArticleTypeEnum, CurrentPage ?? 1);
 
         if (model == null)
             return;
@@ -76,11 +73,6 @@ public partial class Article_List
         if (PagingModel.CurrentPage != null && PagingModel.CurrentPage != 1)
         {
             queryStringDic.Add(nameof(PagingModel.CurrentPage), PagingModel.CurrentPage ?? 1);
-        }
-
-        if (!string.IsNullOrWhiteSpace(Keyword))
-        {
-            queryStringDic.Add(nameof(Keyword), Keyword);
         }
 
         var queryString = "";

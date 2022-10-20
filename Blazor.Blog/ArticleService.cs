@@ -22,7 +22,7 @@ public class ArticleService
     /// <param name="page"></param>
     /// <param name="keyword"></param>
     /// <returns></returns>
-    public async Task<PagingModel?> GetArticleIntroduction(ArticleTypeEnum type, int page, string? keyword)
+    public async Task<PagingModel?> GetArticleIntroduction(ArticleTypeEnum type, int page)
     {
         int pageSize = 12,
            skipPages = (page - 1) * pageSize;
@@ -32,7 +32,7 @@ public class ArticleService
         if (source == null)
             return null;
 
-        var articleList = KeywordFilter(source, keyword).ToArray();
+        var articleList = KeywordFilter(source).ToArray();
 
         var totalPage = 1;
 
@@ -55,19 +55,9 @@ public class ArticleService
     /// <param name="source"></param>
     /// <param name="keyword"></param>
     /// <returns></returns>
-    private IEnumerable<ArticleIntroductionModel> KeywordFilter(ArticleIntroductionModel[] source, string? keyword)
+    private IEnumerable<ArticleIntroductionModel> KeywordFilter(ArticleIntroductionModel[] source)
     {
-        return source.Where(x =>
-        {
-            if (string.IsNullOrWhiteSpace(keyword))
-                return true;
-            else if (!string.IsNullOrWhiteSpace(x.NickName) && x.NickName.ToLower().Contains(keyword))
-                return true;
-            else if (!string.IsNullOrWhiteSpace(x.Title) && x.Title.ToLower().Contains(keyword))
-                return true;
-
-            return false;
-        });
+        return source;
     }
 
     public async Task<IEnumerable<ArticleIntroductionModel>> GetArticleList(ArticleTypeEnum? type)
