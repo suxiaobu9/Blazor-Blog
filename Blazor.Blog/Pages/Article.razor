@@ -1,86 +1,9 @@
 ﻿@page "/Article/{Nickname}"
-@using Blazor.Blog.Enum
-@using Blazor.Blog.Model
-@using Markdig
-@inject HttpClient httpClient
-@inject IJSRuntime jsRuntime
-@inject ArticleService articleService
-@inject NavigationManager urlHelper
 
-<meta name="keywords" content="@(articleModel?.SEOKeyword ?? "")">
+<meta name="keywords" content="@(ArticleModel?.SEOKeyword ?? "")">
 
-<meta name="description" content="@(articleModel?.Description ?? "")">
+<meta name="description" content="@(ArticleModel?.Description ?? "")">
 
 <div class="markdown-body px-4 pt-4 pb-10 max-w-screen">
-    @((MarkupString)(htmlContent ?? ""))
+    @((MarkupString)(HtmlContent ?? ""))
 </div>
-
-@code {
-    [Parameter]
-    public string? Nickname { get; set; }
-
-    private ArticleModel? articleModel { get; set; }
-
-    private string? htmlContent { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        await base.OnInitializedAsync();
-
-        await LoadingArticle();
-    }
-
-    private ArticleIntroductionModel? ContentNickName(ArticleIntroductionModel[] articleList)
-    {
-        var hasNickName = articleList.Any(x => x.NickName == Nickname);
-
-        if (!hasNickName) return null;
-
-        ArticleIntroductionModel? model = articleList.FirstOrDefault(x => x.NickName == Nickname);
-
-        return model;
-
-    }
-
-    private async Task LoadingArticle()
-    {
-        var checkAry = (await articleService.GetArticleList(null)).ToArray();
-
-        var articleModel = ContentNickName(checkAry);
-
-        if (articleModel == null)
-        {
-            urlHelper.NavigateTo("/", true);
-            return;
-        }
-
-        // 文章內容
-        var mdContent = await httpClient.GetStringAsync($"/Markdown/{articleModel.ArticleTypeEnum.ToString()}/{Nickname}.md");
-
-        var result = new ArticleModel
-        {
-            Description = $"{articleModel.NickName} - {articleModel.Title}",
-            SEOKeyword = string.Join(",", articleModel.SEOKeywords ?? Array.Empty<string>())
-        };
-
-        // 轉 html
-        htmlContent = Markdown.ToHtml(mdContent ?? "");
-
-        StateHasChanged();
-
-        await jsRuntime.InvokeVoidAsync("OnScrollEvent");
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await jsRuntime.InvokeVoidAsync("Prism.highlightAll");
-    }
-
-    protected override async Task OnParametersSetAsync()
-    {
-        await base.OnParametersSetAsync();
-        await LoadingArticle();
-    }
-
-}
-
