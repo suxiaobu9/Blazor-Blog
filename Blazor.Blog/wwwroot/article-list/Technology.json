@@ -1,44 +1,51 @@
 [
   {
+    "Title": "Azure Devops Pipelines 無法刪除的處理方式",
+    "NickName": "how-to-delete-azure-devops-pipelines-force",
+    "DisplayDate": "2022-10-21T00:00:00",
+    "Hints": ["azure devops", "pipeline"],
+    "SEOKeywords": ["azure devops"]
+  },
+  {
     "Title": "指派 Azure RBAC 並新增 Key",
     "NickName": "assign-azure-rbac-and-create-key",
     "DisplayDate": "2022-10-18T00:00:00",
-    "Hints": [ "azure", "RBAC" ],
-    "SEOKeywords": [ "azure", "RBAC" ]
+    "Hints": ["azure", "RBAC"],
+    "SEOKeywords": ["azure", "RBAC"]
   },
   {
     "Title": "建立 Blazor 的 Azure 靜態網頁並用指令部署",
     "NickName": "create-and-deploy-azure-static-web-app-by-cli",
     "DisplayDate": "2022-10-18T00:00:00",
-    "Hints": [ "azure static web app", "blazor" ],
-    "SEOKeywords": [ "azure", "static web app", "swa", "blazor" ]
+    "Hints": ["azure static web app", "blazor"],
+    "SEOKeywords": ["azure", "static web app", "swa", "blazor"]
   },
   {
     "Title": "利用指令在 IIS 建立一個 .Net 網站",
     "NickName": "create-dotnet-site-on-iis-by-cli",
     "DisplayDate": "2022-10-13T00:00:00",
-    "Hints": [ "iis" ],
-    "SEOKeywords": [ "Internet Information Services", "iis", ".net" ]
+    "Hints": ["iis"],
+    "SEOKeywords": ["Internet Information Services", "iis", ".net"]
   },
   {
     "Title": "利用 Powershell 新增、匯入、匯出 Hyper-V 虛擬機",
     "NickName": "hyper-v-cli",
     "DisplayDate": "2022-10-11T00:00:00",
-    "Hints": [ "hyper-v", "vm" ],
-    "SEOKeywords": [ "hyper-v", "vm" ]
+    "Hints": ["hyper-v", "vm"],
+    "SEOKeywords": ["hyper-v", "vm"]
   },
   {
     "Title": "Blazor 立刻取得值的方法",
     "NickName": "blazor-get-value-immediately",
     "DisplayDate": "2022-10-01T00:00:00",
-    "Hints": [ "Blazor", "bind", "oninput" ],
-    "SEOKeywords": [ "Blazor", "bind", "oninput", "ChangeEventArgs" ]
+    "Hints": ["Blazor", "bind", "oninput"],
+    "SEOKeywords": ["Blazor", "bind", "oninput", "ChangeEventArgs"]
   },
   {
     "Title": "Blazor WebAssembly PWA 自動更新 Client 端程式版本",
     "NickName": "blazor-webassembly-auto-update-client-version",
     "DisplayDate": "2022-09-27T00:00:00",
-    "Hints": [ "Blazor WebAssembly PWA" ],
+    "Hints": ["Blazor WebAssembly PWA"],
     "SEOKeywords": [
       "Blazor",
       "Blazor WebAssembly",
@@ -52,7 +59,7 @@
     "Title": "將 .NET 6 程式打包與部署到 Azure App Service 上 (Windows OS)",
     "NickName": "publish-and-deploy-dotnet-6-to-azure-iis",
     "DisplayDate": "2022-09-19T00:00:00",
-    "Hints": [ "Azure App Service", "Azure CLI" ],
+    "Hints": ["Azure App Service", "Azure CLI"],
     "SEOKeywords": [
       "azure cli",
       "azure",
@@ -72,7 +79,7 @@
     "Title": "將 .NET Framework 程式打包與部署到 Azure App Service 上 (Windows OS)",
     "NickName": "publish-and-deploy-dotnet-framework-to-azure-iis",
     "DisplayDate": "2022-09-19T00:00:00",
-    "Hints": [ "Azure App Service", "Azure CLI", ".net framework" ],
+    "Hints": ["Azure App Service", "Azure CLI", ".net framework"],
     "SEOKeywords": [
       "msbuild",
       "azure",
@@ -90,14 +97,14 @@
     "Title": "Azure 新增 User Assign 給服務，以及取得 Key",
     "NickName": "assigh-user-role-to-azure-service",
     "DisplayDate": "2022-09-19T00:00:00",
-    "Hints": [ "Azure App Service" ],
-    "SEOKeywords": [ "azure" ]
+    "Hints": ["Azure App Service"],
+    "SEOKeywords": ["azure"]
   },
   {
     "Title": "利用 Let's Encrypt 將 Azure App Service 網站免費升級成 https",
     "NickName": "use-lets-encrypt-to-update-web-site-to-https-free",
     "DisplayDate": "2022-09-12T00:00:00",
-    "Hints": [ "Let's Encrypt" ],
+    "Hints": ["Let's Encrypt"],
     "SEOKeywords": [
       "Let's Encrypt",
       "https",
@@ -118,7 +125,7 @@
     "Title": "重灌後Visual Studio沒辦法還原Nuget套件",
     "NickName": "set-nuget-ref-url",
     "DisplayDate": "2021-09-01T00:00:00",
-    "Hints": [ "https://api.nuget.org/v3/index.json" ],
+    "Hints": ["https://api.nuget.org/v3/index.json"],
     "SEOKeywords": null
   },
   {
@@ -132,7 +139,7 @@
     "Title": "Docker Containers 之間相互溝通",
     "NickName": "docker-containers-connunicate-to-each-other",
     "DisplayDate": "2021-08-04T00:00:00",
-    "Hints": [ "docker network ls", "docker network inspect bridge" ],
+    "Hints": ["docker network ls", "docker network inspect bridge"],
     "SEOKeywords": null
   },
   {
@@ -160,7 +167,7 @@
     "Title": "移除特殊名稱的資料夾",
     "NickName": "remove-special-dir",
     "DisplayDate": "2021-07-14T00:00:00",
-    "Hints": [ "dir /x", "rename {0} {1}" ],
+    "Hints": ["dir /x", "rename {0} {1}"],
     "SEOKeywords": null
   },
   {
@@ -174,7 +181,7 @@
     "Title": "使用Ngrok測試地端網站",
     "NickName": "use-ngrok-to-teast-local-website",
     "DisplayDate": "2021-04-26T00:00:00",
-    "Hints": [ "ngrok http {port} --host-header=\"localhost:{port}\"" ],
+    "Hints": ["ngrok http {port} --host-header=\"localhost:{port}\""],
     "SEOKeywords": null
   },
   {
