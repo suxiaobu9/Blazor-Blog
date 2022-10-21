@@ -1,6 +1,6 @@
 ﻿using Blazor.Blog.Enum;
 using Blazor.Blog.Model;
-using Blazor.Blog.State;
+using Blazor.Blog.Service;
 using Microsoft.AspNetCore.Components;
 
 namespace Blazor.Blog.Component;

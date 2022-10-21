@@ -1,7 +1,68 @@
 ﻿@page "/Search"
+@using Blazor.Blog.Model
+@using Blazor.Blog.Service
+@using Microsoft.AspNetCore.WebUtilities
+
+@inject NavigationManager NavigationManager
+@inject ArticleService ArticleService
+
+<div class="flex justify-center">
+    @foreach (var item in Keywords)
+    {
+        <div @onclick="(()=>DeleteKeyword(item))" class="border-2 px-2 mx-1 mt-1 bg-zinc-100 border-zinc-200 cursor-pointer rounded-lg">
+            ✘ @item
+        </div>
+    }
+</div>
+
+<div class="p-4 flex flex-wrap">
+    @foreach (var item in ArticleIntroductions)
+    {
+        <Article_Introduction Introduction="item"></Article_Introduction>
+    }
+</div>
 
 @code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "Keyword")]
+    public string[] Keywords { get; set; } = Array.Empty<string>();
 
+    private ArticleIntroductionModel[] ArticleIntroductions { get; set; } = Array.Empty<ArticleIntroductionModel>();
 
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
 
+    public void DeleteKeyword(string keyword)
+    {
+        Keywords = Keywords.Where(x => x != keyword).ToArray();
+
+        var url = "/Search";
+
+        if (Keywords.Length == 0)
+        {
+            NavigationManager.NavigateTo("/");
+            StateHasChanged();
+            return;
+        }
+
+        foreach (var item in Keywords.Where(x => !string.IsNullOrWhiteSpace(x)))
+            url = QueryHelpers.AddQueryString(url, "Keyword", item);
+
+        NavigationManager.NavigateTo(url);
+
+        StateHasChanged();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Console.WriteLine(nameof(OnParametersSetAsync));
+
+        ArticleIntroductions = await ArticleService.GetArticleSearchResult(Keywords);
+        Console.WriteLine(nameof(OnParametersSetAsync));
+
+        StateHasChanged();
+        await base.OnParametersSetAsync();
+    }
 }

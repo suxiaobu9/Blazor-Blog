@@ -1,5 +1,5 @@
 using Blazor.Blog;
-using Blazor.Blog.State;
+using Blazor.Blog.Service;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

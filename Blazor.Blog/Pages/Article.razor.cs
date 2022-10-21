@@ -1,4 +1,5 @@
 ﻿using Blazor.Blog.Model;
+using Blazor.Blog.Service;
 using Markdig;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -69,17 +70,14 @@ public partial class Article
             return;
         }
 
-        // 文章內容
-        var mdContent = await HttpClient.GetStringAsync($"/Markdown/{articleIntroduction.ArticleTypeEnum}/{Nickname}.md?v={DateTime.UtcNow.Ticks}");
-
-        ArticleModel = new ArticleModel
+        ArticleModel = new ArticleModel(articleIntroduction)
         {
-            Description = $"{articleIntroduction.NickName} - {articleIntroduction.Title}",
-            SEOKeyword = string.Join(",", articleIntroduction.SEOKeywords ?? Array.Empty<string>())
+            // 文章內容
+            MdContent = await HttpClient.GetStringAsync($"/Markdown/{articleIntroduction.ArticleTypeEnum}/{articleIntroduction.NickName}.md?v={DateTime.UtcNow.Ticks}")
         };
 
         // 轉 html
-        HtmlContent = Markdown.ToHtml(mdContent ?? "");
+        HtmlContent = Markdown.ToHtml(ArticleModel.MdContent ?? "");
 
         StateHasChanged();
 
