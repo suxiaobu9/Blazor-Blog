@@ -1,5 +1,12 @@
 [
   {
+    "Title": "將 Azure App Service 自訂網域並免費升級成 Https",
+    "NickName": "set-custom-domain-and-bind-ssl",
+    "DisplayDate": "2022-10-25",
+    "Hints": ["app server", "https"],
+    "SEOKeywords": ["azure", "app service", "https", "ssl"]
+  },
+  {
     "Title": "Azure Devops Pipelines 無法刪除的處理方式",
     "NickName": "how-to-delete-azure-devops-pipelines-force",
     "DisplayDate": "2022-10-21T00:00:00",
