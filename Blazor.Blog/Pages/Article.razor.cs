@@ -73,7 +73,7 @@ public partial class Article
         ArticleModel = new ArticleModel(articleIntroduction)
         {
             // 文章內容
-            MdContent = await HttpClient.GetStringAsync($"/Markdown/{articleIntroduction.ArticleTypeEnum}/{articleIntroduction.NickName}.md?v={DateTime.UtcNow.Ticks}")
+            MdContent = await HttpClient.GetStringAsync($"/Markdown/{articleIntroduction.ArticleTypeEnum}/{articleIntroduction.NickName}.md")
         };
 
         // 轉 html

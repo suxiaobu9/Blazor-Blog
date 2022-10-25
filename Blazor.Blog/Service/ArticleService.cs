@@ -61,7 +61,7 @@ public class ArticleService
         if (type == ArticleTypeEnum.Technology || type == null)
             jsonNameAry.Add(ArticleTypeEnum.Technology);
 
-        var tasks = jsonNameAry.Select(x => (x, httpClient.GetFromJsonAsync<ArticleIntroductionModel[]>($"article-list/{x}.json?v={DateTime.UtcNow.Ticks}")));
+        var tasks = jsonNameAry.Select(x => (x, httpClient.GetFromJsonAsync<ArticleIntroductionModel[]>($"article-list/{x}.json")));
 
         var result = new List<ArticleIntroductionModel>();
 
@@ -92,7 +92,7 @@ public class ArticleService
         ArticleIntroductionModel[] allArticleIntroductions = (await GetArticleList(null)).ToArray();
 
         Task<string>[] getMdContentTasks = allArticleIntroductions
-            .Select(x => httpClient.GetStringAsync($"/Markdown/{x.ArticleTypeEnum}/{x.NickName}.md?v={DateTime.UtcNow.Ticks}"))
+            .Select(x => httpClient.GetStringAsync($"/Markdown/{x.ArticleTypeEnum}/{x.NickName}.md"))
             .ToArray();
 
         var articleWithMdContent = new (string mdContent, ArticleIntroductionModel articleModel)[getMdContentTasks.Length];
