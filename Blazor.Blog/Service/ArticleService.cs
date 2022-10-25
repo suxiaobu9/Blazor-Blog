@@ -100,13 +100,34 @@ public class ArticleService
         for (var i = 0; i < getMdContentTasks.Length; i++)
             articleWithMdContent[i] = (await getMdContentTasks[i], allArticleIntroductions[i]);
 
+        keywords = keywords.Select(x => x.ToLower()).ToArray();
+
         foreach (var keyword in keywords)
         {
-            articleWithMdContent = articleWithMdContent.Where(x => (!string.IsNullOrWhiteSpace(x.mdContent) && x.mdContent.Contains(keyword)) ||
-                                            string.Join(",", x.articleModel.Hints ?? Array.Empty<string>()).Contains(keyword) ||
-                                            string.Join(",", x.articleModel.SEOKeywords ?? Array.Empty<string>()).Contains(keyword) ||
-                                            (x.articleModel.NickName ?? "").Contains(keyword) ||
-                                            (x.articleModel.Title ?? "").Contains(keyword)).ToArray();
+            articleWithMdContent = articleWithMdContent.Where(x =>
+            {
+                var tmp = new List<string>();
+
+                if (!string.IsNullOrWhiteSpace(x.mdContent))
+                    tmp.Add(x.mdContent);
+
+                if (x.articleModel.Hints != null)
+                    tmp.AddRange(x.articleModel.Hints);
+
+                if (x.articleModel.SEOKeywords != null)
+                    tmp.AddRange(x.articleModel.SEOKeywords);
+
+                if (!string.IsNullOrWhiteSpace(x.articleModel.NickName))
+                    tmp.Add(x.articleModel.NickName);
+
+                if (!string.IsNullOrWhiteSpace(x.articleModel.Title))
+                    tmp.Add(x.articleModel.Title);
+
+                tmp = tmp.Select(x => x.ToLower()).ToList();
+
+                return tmp.Any(x => x.Contains(keyword));
+
+            }).ToArray();
         }
 
         return articleWithMdContent.Select(x => x.articleModel).ToArray();
