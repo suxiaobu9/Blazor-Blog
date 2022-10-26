@@ -1,5 +1,7 @@
 ﻿# 利用 Let's Encrypt 將 Azure App Service 網站免費升級成 https
 
+## 2022-10-26 - 更簡單的處理方式 [將 Azure App Service 自訂網域並免費升級成 Https](/Technology/set-custom-domain-and-bind-ssl)
+
 ## 環境
 
 - Azure
