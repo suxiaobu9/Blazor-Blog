@@ -45,7 +45,6 @@
   - 安裝完成後需要重新開啟 Powershell
 
     ```powershell
-    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
     $ProgressPreference = 'SilentlyContinue';
     Invoke-WebRequest `
     -Uri https://aka.ms/installazurecliwindows `
