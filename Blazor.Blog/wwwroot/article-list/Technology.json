@@ -1,5 +1,12 @@
 [
   {
+    "Title": "Blazor 取得 URL 參數與 Query Strings 的方式",
+    "NickName": "the-way-of-blazor-to-get-url-parameter-and-query-strings",
+    "DisplayDate": "2022-10-26",
+    "Hints": ["blazor", "url parameter", "query string"],
+    "SEOKeywords": ["blazor", "router", "url parameter", "query strings"]
+  },
+  {
     "Title": "將 Azure App Service 自訂網域並免費升級成 Https",
     "NickName": "set-custom-domain-and-bind-ssl",
     "DisplayDate": "2022-10-25",
