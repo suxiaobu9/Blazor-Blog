@@ -1,7 +1,9 @@
-﻿@using Microsoft.AspNetCore.WebUtilities
+﻿@using Blazor.Blog.Stage
+@using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.Extensions.Primitives
 
 @inject NavigationManager NavigationManager
+@inject KeywordSearchStage KeywordSearchStage
 
 <input class="p-2 border-zinc-300 border-2 rounded-lg focus:outline-0 focus:border-zinc-400 text-zinc-500"
        @bind="@Keyword"
@@ -11,10 +13,13 @@
 <button class="ml-2 p-2 border-2 rounded-lg text-zinc-500 hover:text-white hover:bg-zinc-500" @onclick="@SearchClick">搜尋</button>
 
 @code {
+
     private string? Keyword { get; set; }
+
     private bool foundQueryParameter { get; set; }
+
     private Dictionary<string, StringValues> valueFromQueryString { get; set; } = new Dictionary<string, StringValues>();
-    private string Test { get; set; } = "";
+
     private void SearchClick()
     {
         if (string.IsNullOrWhiteSpace(Keyword))
@@ -52,6 +57,15 @@
         {
             SearchClick();
         }
+
+        // Ctrl + enter
+        if (args.Key.Length == 1 &&
+            (int)args.Key[0] == 10 &&
+            args.Code.ToLower() == "enter")
+        {
+            KeywordSearchStage.NotifyStateChange();
+        }
+
     }
 
 }

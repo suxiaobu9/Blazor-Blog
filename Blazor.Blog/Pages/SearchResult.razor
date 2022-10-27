@@ -1,10 +1,14 @@
 ﻿@page "/Search"
 @using Blazor.Blog.Model
 @using Blazor.Blog.Service
+@using Blazor.Blog.Stage
 @using Microsoft.AspNetCore.WebUtilities
 
 @inject NavigationManager NavigationManager
 @inject ArticleService ArticleService
+@inject KeywordSearchStage KeywordSearchStage
+
+@implements IDisposable
 
 <div class="flex justify-center">
     @foreach (var item in Keywords)
@@ -31,6 +35,7 @@
 
     protected override Task OnInitializedAsync()
     {
+        KeywordSearchStage.KeyBoardEscPressEvent += KeyBoardEscPress;
         return base.OnInitializedAsync();
     }
 
@@ -57,12 +62,25 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        Console.WriteLine(nameof(OnParametersSetAsync));
-
         ArticleIntroductions = await ArticleService.GetArticleSearchResult(Keywords);
-        Console.WriteLine(nameof(OnParametersSetAsync));
 
         StateHasChanged();
         await base.OnParametersSetAsync();
+    }
+
+    private void KeyBoardEscPress()
+    {
+        Console.WriteLine(nameof(KeyBoardEscPress));
+        if (!Keywords.Any())
+            return;
+
+        var targetKeyword = Keywords.Last();
+
+        DeleteKeyword(targetKeyword);
+    }
+
+    public void Dispose()
+    {
+        KeywordSearchStage.KeyBoardEscPressEvent -= KeyBoardEscPress;
     }
 }
