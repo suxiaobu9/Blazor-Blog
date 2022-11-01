@@ -1,5 +1,12 @@
 [
   {
+    "Title": ".Net 6 console Top Level Statements 筆記",
+    "NickName": "dotnet-6-top-level-statement-notes",
+    "DisplayDate": "2022-11-01",
+    "Hints": ["Top Level Statement", "console"],
+    "SEOKeywords": ["Top Level Statement", ".net 6", "console"]
+  },
+  {
     "Title": "C# 淺嚐 Lazy<T> - 延遲初始設定",
     "NickName": "csharp-try-lazy-class",
     "DisplayDate": "2022-11-01",
