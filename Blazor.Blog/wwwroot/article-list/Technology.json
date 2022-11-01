@@ -1,5 +1,12 @@
 [
   {
+    "Title": "C# 淺嚐 Lazy<T> - 延遲初始設定",
+    "NickName": "csharp-try-lazy-class",
+    "DisplayDate": "2022-11-01",
+    "Hints": ["C#", "lazy"],
+    "SEOKeywords": ["C#", "lazy"]
+  },
+  {
     "Title": "Blazor 取得 URL 參數與 Query Strings 的方式",
     "NickName": "the-way-of-blazor-to-get-url-parameter-and-query-strings",
     "DisplayDate": "2022-10-26",
