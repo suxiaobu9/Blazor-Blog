@@ -1,5 +1,19 @@
 [
   {
+    "Title": "Blazor 的三種 Components 之間溝通的方式",
+    "NickName": "three-ways-to-communicate-between-components",
+    "DisplayDate": "2022-11-02",
+    "Hints": ["EventCallbacks", "Cascading Values", "State Container"],
+    "SEOKeywords": [
+      "EventCallbacks",
+      "Cascading Values",
+      "State Container",
+      "blazor",
+      "WASM",
+      "WebAssembly"
+    ]
+  },
+  {
     "Title": ".Net 6 console Top Level Statements 筆記",
     "NickName": "dotnet-6-top-level-statement-notes",
     "DisplayDate": "2022-11-01",
