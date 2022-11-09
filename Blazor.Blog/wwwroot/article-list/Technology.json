@@ -1,5 +1,12 @@
 [
   {
+    "Title": "權限運算 - Enum 二元邏輯運算符",
+    "NickName": "permission-binary-logic-operators",
+    "DisplayDate": "2022-11-09",
+    "Hints": ["Enum", "Flags", "Binary logical operators", "權限運算"],
+    "SEOKeywords": ["Enum", "Flags", "Binary logical operators"]
+  },
+  {
     "Title": "Blazor 的三種 Components 之間溝通的方式",
     "NickName": "three-ways-to-communicate-between-components",
     "DisplayDate": "2022-11-02",
