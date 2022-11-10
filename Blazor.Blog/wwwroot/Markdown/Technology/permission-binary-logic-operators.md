@@ -17,7 +17,7 @@ enum Permission
 
 ```
 
-## 給 User `Read`、`Create`、`Edit` 權限 ( Logical OR operator `|` )
+## 給 User 權限 ( Logical OR operator `|` )
 
 ```csharp
 var userPermission = Permission.Read | Permission.Create | Permission.Edit;
