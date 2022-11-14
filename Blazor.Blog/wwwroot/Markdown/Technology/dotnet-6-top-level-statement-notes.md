@@ -20,6 +20,7 @@
 ```csharp
 using Microsoft.Extensions.Configuration;
 
+var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
 IConfiguration config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", true, true)
