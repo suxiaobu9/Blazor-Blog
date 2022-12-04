@@ -1,5 +1,12 @@
 [
   {
+    "Title": "檢查 PowerShell Script 是否是以管理員權限執行",
+    "NickName": "is-powershell-script-run-in-administrator-role",
+    "DisplayDate": "2022-12-04",
+    "Hints": ["powershell", "administrator"],
+    "SEOKeywords": ["powershell", "administrator"]
+  },
+  {
     "Title": "Win10/11 桌面圖示間距過大的處理方式",
     "NickName": "win-10-11-desktop-icon-spacing-too-large",
     "DisplayDate": "2022-11-16",
