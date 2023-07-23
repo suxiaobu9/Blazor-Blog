@@ -1,5 +1,18 @@
 [
   {
+    "Title": "Redis Transaction 條件用法",
+    "NickName": "redis-transaction-conditional-usage",
+    "DisplayDate": "2023-07-23",
+    "Hints": [
+      "redis",
+      "transaction"
+    ],
+    "SEOKeywords": [
+      "redis",
+      "transaction"
+    ]
+  },
+  {
     "Title": "關閉開始選單的關機以及休眠按鈕",
     "NickName": "hidden-poweroff-and-sleep-btn-in-windows-start-menu",
     "DisplayDate": "2023-01-09",
