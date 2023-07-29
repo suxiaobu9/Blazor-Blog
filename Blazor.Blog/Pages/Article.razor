@@ -2,10 +2,6 @@
 
 @inherits ArticleTypeBase
 
-<meta name="keywords" content="@(ArticleModel?.SEOKeyword ?? "")">
-
-<meta name="description" content="@(ArticleModel?.Description ?? "")">
-
 <div class="markdown-body px-4 pt-4 pb-10 max-w-screen">
     @((MarkupString)(HtmlContent ?? ""))
 </div>

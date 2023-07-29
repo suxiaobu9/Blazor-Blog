@@ -9,27 +9,3 @@
         @Body
     </div>
 </main>
-
-@code {
-
-    protected override async Task OnInitializedAsync()
-    {
-        await RegisterForUpdateAvailableNotification();
-        await base.OnInitializedAsync();
-    }
-
-    private async Task RegisterForUpdateAvailableNotification()
-    {
-        await JSRuntime.InvokeAsync<object>(
-            identifier: "registerForUpdateAvailableNotification",
-            DotNetObjectReference.Create(this),
-            nameof(OnUpdateAvailable));
-    }
-
-    [JSInvokable(nameof(OnUpdateAvailable))]
-    public void OnUpdateAvailable()
-    {
-        NavigationManager.NavigateTo(NavigationManager.Uri, true);
-    }
-
-}
