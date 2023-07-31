@@ -1,15 +1,12 @@
 [
   {
-    "Title": "Redis Transaction 條件用法",
-    "NickName": "redis-transaction-conditional-usage",
-    "DisplayDate": "2023-07-23",
+    "Title": "從 Windows 利用金鑰免密碼登入 Linux SSH",
+    "NickName": "login-linux-ssh-with-windows-ssh-key",
+    "DisplayDate": "2023-07-31",
     "Hints": [
-      "redis",
-      "transaction"
-    ],
-    "SEOKeywords": [
-      "redis",
-      "transaction"
+      "linux",
+      "ssh",
+      "login"
     ]
   },
   {
