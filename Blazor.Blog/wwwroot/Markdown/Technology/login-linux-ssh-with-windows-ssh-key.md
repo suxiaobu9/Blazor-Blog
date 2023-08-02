@@ -6,6 +6,7 @@
 
   ```bash
   sudo apt update
+  sudo apt upgrade
   sudo apt install openssh-server
   ```
 
@@ -17,6 +18,8 @@
 
   # 看 OpenSSH 有沒有啟動
   sudo service ssh status
+
+  mkdir ~/.ssh
   ```
 
 - 設置防火牆
