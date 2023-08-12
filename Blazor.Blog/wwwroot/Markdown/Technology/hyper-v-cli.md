@@ -4,7 +4,7 @@
 
 - PowerShell 指令皆需要再 `系統管理員` 權限下執行
 
-## 新增
+## 新增 - Windows 10
 
 ```powershell
 $date = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
@@ -18,11 +18,10 @@ $VMPath = 'D:\Hyper'
 # OS 安裝檔路徑
 $ISOPath = "D:\Windows.iso"
 
-$GiB = 1024 * 1024 * 1024
 # 硬碟大小
-$disk = 100 * $GiB
+$disk = 100GB
 # 啟動記憶體
-$memory = 2 * $GiB
+$memory = 2GB
 # CPU 數量
 $CPUCount = 5
 
@@ -42,6 +41,64 @@ $VM | Set-VMProcessor -ExposeVirtualizationExtensions $true
 $VM | Set-VMMemory -DynamicMemoryEnabled $true
 # 設定 OS 安裝檔路徑
 $VM | Get-VMDvdDrive | Set-VMDvdDrive -Path $ISOPath
+# 啟動 VM
+$VM | Start-VM
+# 連線至 VM
+VMConnect $env:COMPUTERNAME $VMName
+
+```
+
+## 新增 - Windows 11 - _僅適用於測試環境_
+
+### 僅適用於測試環境 Windows 11
+
+```powershell
+$date = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
+
+# VM 名稱
+$VMName = "Win-11-$date"
+# 虛擬交換器名稱
+$Switch = 'Default Switch'
+# 放 VM 檔案的位子
+$VMPath = 'D:\Hyper'
+# OS 安裝檔路徑
+$ISOPath = "D:\Windows.iso"
+
+# 硬碟大小
+$disk = 100GB
+# 啟動記憶體
+$memory = 4GB
+# CPU 數量
+$CPUCount = 5
+
+# 建立新的虛擬機器
+$VM = New-VM -Name $VMName `
+    -SwitchName $Switch `
+    -Path $VMPath `
+    -NewVHDPath "${VMPath}\${VMName}\Virtual Hard Disks\${VMName}.vhdx" `
+    -MemoryStartupBytes $memory `
+    -Generation 2 `
+    -NewVHDSizeBytes $disk
+
+# 設定 CPU 數量
+$VM | Set-VMProcessor -Count $CPUCount
+# 啟動 CPU 支援巢狀虛擬化
+$VM | Set-VMProcessor -ExposeVirtualizationExtensions $true
+# 啟動動態記憶體
+$VM | Set-VMMemory -DynamicMemoryEnabled $true
+# 設定 DVD 驅動器
+Add-VMDvdDrive -VMName $VMName -Path $ISOPath
+# 獲取 DVD 驅動器物件
+$DVDDrive = Get-VMDvdDrive -VMName $VMName
+# 設定 DVD 驅動器為第一個啟動裝置
+Set-VMFirmware -VMName $VMName -FirstBootDevice $DVDDrive
+# 設定並取得金鑰
+$owner = Get-HgsGuardian UntrustedGuardian
+$kp = New-HgsKeyProtector -Owner $owner -AllowUntrustedRoot
+# 設定金鑰
+Set-VMKeyProtector -VMName $VMName -KeyProtector $kp.RawData
+# 啟動 TPM
+Enable-VMTPM -VMName $VMName
 # 啟動 VM
 $VM | Start-VM
 # 連線至 VM
