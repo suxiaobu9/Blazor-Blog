@@ -11,7 +11,7 @@
             </div>
             @if (Introduction.Hints != null && Introduction.Hints.Any())
             {
-                <ul>
+                <ul class="list-none">
                     @foreach (var item in Introduction.Hints)
                     {
                         <li><span class="break-words text-md text-zinc-400">@item</span></li>

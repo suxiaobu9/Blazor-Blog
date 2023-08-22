@@ -597,6 +597,10 @@ menu {
   cursor: pointer;
 }
 
+.list-none {
+  list-style-type: none;
+}
+
 .flex-row-reverse {
   flex-direction: row-reverse;
 }
