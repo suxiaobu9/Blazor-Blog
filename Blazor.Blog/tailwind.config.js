@@ -8,5 +8,17 @@ module.exports = {
             }
         },
     },
-    plugins: [],
+    plugins: [function ({ addBase }) {
+        addBase({
+            'ul': {
+                listStyle: 'revert',
+            },
+            'ol': {
+                listStyle: 'revert',
+            },
+            'menu': {
+                listStyle: 'revert',
+            }
+        })
+    }],
 };

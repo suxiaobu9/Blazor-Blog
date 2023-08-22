@@ -434,6 +434,18 @@ video {
   display: none;
 }
 
+ul {
+  list-style: revert;
+}
+
+ol {
+  list-style: revert;
+}
+
+menu {
+  list-style: revert;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
