@@ -1,5 +1,16 @@
 [
   {
+    "Title": "mRemoteNG(Multi-Remote Next Generation Connection Manager) - 一個好用的遠端桌面管理工具",
+    "NickName": "multi-remote-next-generation-connection-manager-an-useful-remote-desktop-manager",
+    "DisplayDate": "2023-08-22",
+    "Hints": [
+      "mRemoteNG",
+      "rdp",
+      "ssh",
+      "remote"
+    ]
+  },
+  {
     "Title": "利用 azure cli 快速建立 Azure Service Bus 服務",
     "NickName": "create-azure-service-bus-by-azure-cli",
     "DisplayDate": "2023-08-01",

@@ -48,7 +48,7 @@
 
   ![image](https://github.com/suxiaobu9/JobSeeker/assets/37999690/6af3b000-d99c-4fc4-9633-047e1fbe913d)
 
-- 將 Key 複製到 Linux 中
+- 將 公鑰 複製到 Linux 中
 
   ```ps1
   # ~/.ssh/authorized_keys 不存在，用這指令
@@ -58,7 +58,7 @@
   cat "$env:USERPROFILE\.ssh\id_ed25519.pub" | ssh username@server_ip 'cat >> ~/.ssh/authorized_keys'
   ```
 
-- 啟動 ssh-agent 並將 Key 交給 ssh-agent 保管
+- 啟動 ssh-agent 並將 私鑰 交給 ssh-agent 保管
 
   - 以 `管理員權限` 啟動 powershell
 
