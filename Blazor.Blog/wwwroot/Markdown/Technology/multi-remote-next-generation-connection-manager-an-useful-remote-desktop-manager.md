@@ -1,4 +1,4 @@
-# Windows 環境好用的遠端桌面管理工具 - mRemoteNG (Multi-Remote Next Generation Connection Manager)
+# Windows 環境好用的遠端桌面管理工具 - mRemoteNG
 
 最近因為設備多了且同時有 Windows 與 Linux 的設備，只有 Windows 還可以用 [Microsoft Remote Desktop](https://apps.microsoft.com/store/detail/microsoft-%E9%81%A0%E7%AB%AF%E6%A1%8C%E9%9D%A2/9WZDNCRFJ3PS?hl=zh-tw&gl=tw&rtc=1) 來管理 RDP，如果要加上管理 SSH 連線就要另外找工具了。 [mRemoteNG](https://mremoteng.org/) 就符合我的需求，可以管理 RDP 與 SSH 且介面簡單，同時又是開源以及 **免費** 的方。
 
