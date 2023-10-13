@@ -53,6 +53,16 @@ VMConnect $env:COMPUTERNAME $VMName
 ### 僅適用於測試環境 Windows 11
 
 ```powershell
+
+# 確定 HgsGuardian 有沒有被建立
+$UntrustedGuardian = 'UntrustedGuardian'
+$guardians = Get-HgsGuardian
+$guardianExists = $guardians | Where-Object { $_.Name -eq $UntrustedGuardian }
+
+if (!$guardianExists) {
+    New-HgsGuardian –Name $UntrustedGuardian –GenerateCertificates
+}
+
 $date = Get-Date -Format "yyyy-MM-dd-HH-mm-ss"
 
 # VM 名稱
@@ -93,7 +103,7 @@ $DVDDrive = Get-VMDvdDrive -VMName $VMName
 # 設定 DVD 驅動器為第一個啟動裝置
 Set-VMFirmware -VMName $VMName -FirstBootDevice $DVDDrive
 # 設定並取得金鑰
-$owner = Get-HgsGuardian UntrustedGuardian
+$owner = Get-HgsGuardian $UntrustedGuardian
 $kp = New-HgsKeyProtector -Owner $owner -AllowUntrustedRoot
 # 設定金鑰
 Set-VMKeyProtector -VMName $VMName -KeyProtector $kp.RawData
